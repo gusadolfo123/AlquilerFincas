@@ -3,9 +3,10 @@
 @section('content')
 
 <div class="row-fluid">
-    <div class="col-12 bg-primary py-3">        
+    <!-- <div class="col-12 bg-primary py-3"> Fondo Azul -->
+    <div class="col-12 bg-dark py-3 border border-right-0 border-left-0 border-top-0 border-success">        
         <div class="form-row align-items-end">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 two-fields">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 two-fields">
                 <div class="form-group text-center">     
                     <label for="datePickerEntrada" class="text-white">Fechas</label> 
                     <div class="input-group">    
@@ -14,7 +15,7 @@
                     </div>      
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 two-fields">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 two-fields">
                 <div class="form-group text-center">     
                     <label for="datePickerEntrada" class="text-white">Cantidad Huespedes</label> 
                     <div class="input-group">    
@@ -30,7 +31,7 @@
                 </div>
             </div>      
             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pb-3">
-                <button type="submit" class="btn btn-danger btn-lg btn-block btn-md hbutton">Buscar</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block btn-md hbutton">Buscar</button>
             </div>       
         </div>
     </div>  
@@ -44,40 +45,40 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="first-slide" src="img/1.jpg" alt="First slide">
+            <img class="d-block w-100" src="img/1.jpg" alt="First slide">
             <div class="container">
                 <div class="carousel-caption text-left">
                     <h1>Example headline.</h1>
                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
                         at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                     <p>
-                        <a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a>
+                        <a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a>
                     </p>
                 </div>
             </div>
         </div>
         <div class="carousel-item">
-            <img class="second-slide" src="img/2.jpg" alt="Second slide">
+            <img class="d-block w-100" src="img/2.jpg" alt="Second slide">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Another example headline.</h1>
                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
                         at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                     <p>
-                        <a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a>
+                        <a class="btn btn-lg btn-success" href="#" role="button">Learn more</a>
                     </p>
                 </div>
             </div>
         </div>
         <div class="carousel-item">
-            <img class="third-slide" src="img/3.jpg" alt="Third slide">
+            <img class="d-block w-100" src="img/3.jpg" alt="Third slide">
             <div class="container">
                 <div class="carousel-caption text-right">
                     <h1>One more for good measure.</h1>
                     <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
                         at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                     <p>
-                        <a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a>
+                        <a class="btn btn-lg btn-success" href="#" role="button">Browse gallery</a>
                     </p>
                 </div>
             </div>
