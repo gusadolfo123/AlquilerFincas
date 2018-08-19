@@ -14,7 +14,15 @@
 Route::get('/', function () {
     return view('index');
 });
-
+Route::get('/fincas', function () {
+    return view('farms');
+});
+Route::get('/nosotros', function () {
+    return view('about');
+});
+Route::get('/contacto', function () {
+    return view('contact');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
