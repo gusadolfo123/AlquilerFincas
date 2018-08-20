@@ -351,7 +351,7 @@ a:hover,
         text-align: center !important;
     }
     .color_toggler {
-        background-color: #545ab1 !important;
+        background-color: rgba(37, 131, 76, 0.623) !important;
     }
     .noneDisplay {
         display: none !important;
@@ -419,7 +419,7 @@ a:hover,
     max-width: 210px;
 }
 .offer-main-button-btn {
-    background: #0097e6;
+    background: #38c172;
     border-radius: 5px;
     padding: 10px 0;
     margin: 30px 0 0;
@@ -433,7 +433,7 @@ a:hover,
     text-align: center;
 }
 .offer-main-button-bet {
-    background: #6a72e2;
+    background: #38c172;
     border-radius: 5px;
     margin-top: 5px;
     padding: 20px 22px;
@@ -506,7 +506,7 @@ a:hover,
     text-align: center;
 }
 .popup-app-mercy {
-    background: #0097e6;
+    background: #38c172;
     border-radius: 5px;
     height: 71px;
     padding: 20px;
@@ -532,7 +532,7 @@ a:hover,
     text-align: center;
 }
 .popup-input-mail {
-    border: 1px solid #cccccc;
+    border: 1px solid #38c172;
     border-radius: 5px;
     font-size: 18px;
     height: 50px;
@@ -554,8 +554,8 @@ a:hover,
     background-repeat: no-repeat;
 }
 .popup-form select:focus {
-    background-image: linear-gradient(45deg, transparent 50%, #6a72e2 50%),
-        linear-gradient(135deg, #6a72e2 50%, transparent 50%),
+    background-image: linear-gradient(45deg, transparent 50%, #38c172 50%),
+        linear-gradient(135deg, #38c172 50%, transparent 50%),
         radial-gradient(transparent 66%, transparent 66%);
 }
 .btn {
@@ -565,8 +565,8 @@ a:hover,
     text-transform: uppercase;
 }
 .btn-custom {
-    background-color: #6a72e2;
-    border: 1px solid #6a72e2;
+    background-color: #38c172;
+    border: 1px solid #38c172;
     color: #fff;
     -webkit-box-shadow: 0 0 1px transparent;
     box-shadow: 0 0 1px transparent;
@@ -637,7 +637,7 @@ a:hover,
     top: 0;
 }
 .popup-form .form-group .input-group-icon {
-    background-color: #6a72e2;
+    background-color: #38c172;
     border: none;
     border-radius: 4px;
     border-bottom-right-radius: 0;
@@ -654,18 +654,18 @@ a:hover,
 }
 .popup-form .form-control {
     background-color: transparent;
-    border: 1px solid #6a72e2;
+    border: 1px solid #38c172;
     padding-left: 50px;
 }
 .popup-form .form-control:focus,
 .popup-form .has-error .form-control:focus {
-    border-color: #6a72e2;
+    border-color: #38c172;
     box-shadow: 0 1px 1px rgba(245, 142, 3, 0.075) inset,
         0 0 8px rgba(245, 142, 3, 0.6);
 }
 .popup-form .form-control:focus + .input-group-icon,
 #resetPassForm .has-error .form-control:focus + .input-group-icon {
-    background-color: #6a72e2;
+    background-color: #38c172;
     color: #fff;
 }
 .popup-form .btn.dropdown-toggle.btn-default {
@@ -674,7 +674,7 @@ a:hover,
     border-radius: 0;
     box-shadow: none;
     font-size: 14px;
-    color: #6a72e2;
+    color: #38c172;
     padding: 6px 0;
     text-shadow: none;
 }
@@ -701,7 +701,7 @@ a:hover,
     top: -20px;
 }
 .popup-form .text-success {
-    color: #37a000;
+    color: #38c172;
 }
 .popup-form .text-danger,
 .text-danger {
@@ -786,9 +786,7 @@ a:hover,
 .break-word {
     -ms-word-break: break-all;
     word-break: break-all;
-
     word-break: break-word;
-
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     -ms-hyphens: auto;
@@ -804,5 +802,11 @@ a:hover,
 }
 
 .nav-item:hover {
-    background-color: rgb(66, 77, 230) !important;
+    background-color: #0b6b338a !important;
+}
+
+.card-columns {
+    @include media-breakpoint-only(sm) {
+        column-count: 1;
+    }
 }

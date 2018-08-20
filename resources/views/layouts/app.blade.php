@@ -48,7 +48,7 @@
                             <a class="nav-link" href="{{ url('/nosotros') }}">¿Quienes Somos?</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/farms') }}">Nuestras Fincas</a>
+                            <a class="nav-link" href="{{ url('/fincas') }}">Nuestras Fincas</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Eventos Empresariales</a>
