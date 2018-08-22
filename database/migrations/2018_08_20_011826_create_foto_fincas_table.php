@@ -17,8 +17,8 @@ class CreateFotoFincasTable extends Migration
             $table->increments('id');
             $table->string('archivo', 128)->nullable();
             
-            $table->integer('id_finca')->unsigned();
-            $table->foreign('id_finca')->references('id')->on('fincas');
+            $table->integer('finca_id')->unsigned();
+            $table->foreign('finca_id')->references('id')->on('fincas');
 
         });
     }

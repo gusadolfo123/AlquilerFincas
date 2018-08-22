@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ciudad extends Model
 {
-    //
     public $timestamps = false;
-
-     protected $fillable = ['descripcion'];
+    protected $fillable = ['descripcion'];
 
     /* Relacion  */
     public function fincas(){

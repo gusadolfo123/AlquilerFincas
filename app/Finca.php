@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Finca extends Model
 {
-    //
     public $timestamps = false;
-
-    /* Para salvar datos  */
     protected $fillable = [
         'nombre', 'descripcion', 'precio_Tbaja', 
         'precio_Talta', 'direccion', 'cant_habitaciones', 'cant_banios', 
@@ -17,13 +14,16 @@ class Finca extends Model
     ];
 
     /* Relacion  */
-    public function ciudad(){
+    public function ciudad()
+    {
         // una finca pertenece a una ciudad
         return $this->belongsTo(Ciudad::class);
     }
 
-    public function via(){
+    public function via()
+    {
         // una finca pertenece a una Via
+        //return $this->belongsTo(Via::class);
         return $this->belongsTo(Via::class);
     }
 }

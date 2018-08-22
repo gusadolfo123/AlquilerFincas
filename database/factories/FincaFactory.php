@@ -17,7 +17,7 @@ $factory->define(App\Finca::class, function (Faker $faker) {
         'sn_jacuzi' => $faker->randomElement([true, false]),
         'sn_piscina' => $faker->randomElement([true, false]),
         'slug' => str_slug($nom),
-        'id_via' => rand(1, 10),
-        'id_ciudad' => rand(1, 10)
+        'via_id' => rand(1, 10),
+        'ciudad_id' => rand(1, 10)
     ];
 });

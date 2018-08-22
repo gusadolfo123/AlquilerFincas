@@ -94,82 +94,20 @@
     </a>
 </div>
 
-    
-    @section('scripts')
-        <script>
-            $(function() {
 
-                        $.datepicker.regional['es'] = { closeText: 'Cerrar',
-                                                        prevText: '< Ant',
-                                                        nextText: 'Sig >',
-                                                        currentText: 'Hoy',
-                                                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                                                        monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-                                                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                                                        dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-                                                        dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-                                                        weekHeader: 'Sm',
-                                                        dateFormat: 'dd/mm/yy',
-                                                        firstDay: 1,
-                                                        isRTL: false,
-                                                        showMonthAfterYear: false,
-                                                        yearSuffix: ''
-                        };
-                        
-                        $.datepicker.setDefaults($.datepicker.regional['es']);
-                        
-                        let date1 = new Date();
-                        $("#datePickerEntrada").multiDatesPicker({
-                            minDate: 0,                
-                            maxPicks: 1,
-                            onSelect:function(){
-                                var date = $('#datePickerEntrada').multiDatesPicker('getDates');
-                                if(date.length > 0)
-                                {
-                                    
-                                    var day = date1.getDate();
-                                    var monthIndex = date1.getMonth() + 1;
-                                    var year = date1.getFullYear();
-                                    
-                                    var strDate = date[0].toString();
-                                    let datePrueba = strDate.substring(3,5) + "/" + strDate.substr(0,2) + "/" + strDate.substr(6,7);
-                                    
-                                    var fecha1 = moment(date1).format('l');
-                                    var fecha2 = moment(datePrueba).format('l');
-                                    
-                                    let date11 = new Date(fecha1);
-                                    let date22 = new Date(fecha2);
 
-                                    let  Dif = date22.getTime() - date11.getTime();
-                                    let dias = Math.floor(Dif/(1000*24*60*60));
+@section('scripts')
+<script type="text/javascript">
 
-                                
-                                    $('#datePickerSalida').datepicker('destroy');
-                                    $("#datePickerSalida").multiDatesPicker({
-                                        minDate: dias + 1,
-                                    });
-                                }
-                                else
-                                {
-                                    var strDate = "0";
-                                    $('#datePickerSalida').multiDatesPicker('resetDates', 'picked');
-                                }
-                                    
-                            }
-                        });
-                        
-                        $("#datePickerSalida").multiDatesPicker({
-                            minDate: 0,
-                            maxPicks: 1
-                        });
+    var locations = [
+                        @foreach ($fechas as $fecha)
+                            [ "{{ $fecha->fecha }}" ], 
+                        @endforeach
+                    ];
 
-                        $("#numPersonas").on("keyup",function(){
-                            if($("#numPersonas").val() > 99)
-                                alert("Solo es Permitido un Maximo de 2 Digitos");
-                        });
-                    
-                    });
-        </script>
-    @endsection
+console.log(locations);
+
+</script>
+@endsection
 
 @endsection

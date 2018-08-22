@@ -26,12 +26,12 @@ class CreateFincasTable extends Migration
             $table->boolean('sn_piscina');
             $table->string('slug', 128)->unique(); // url amigable
             
-            $table->integer('id_via')->unsigned();
-            $table->integer('id_ciudad')->unsigned();
+            $table->integer('via_id')->unsigned();
+            $table->integer('ciudad_id')->unsigned();
 
             //relaciones
-            $table->foreign('id_via')->references('id')->on('vias');
-            $table->foreign('id_ciudad')->references('id')->on('ciudads');
+            $table->foreign('via_id')->references('id')->on('vias')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ciudad_id')->references('id')->on('ciudads')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }

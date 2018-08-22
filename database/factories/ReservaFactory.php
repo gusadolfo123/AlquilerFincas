@@ -8,8 +8,8 @@ $factory->define(App\Reserva::class, function (Faker $faker) {
     $endingDate   = $faker->dateTimeBetween($startingDate, strtotime('+6 days'));
 
     return [
-        'id_finca' => rand(1,10),
-        'id_cliente' => rand(1,10),
+        'finca_id' => rand(1,10),
+        'cliente_id' => rand(1,10),
         'fec_Reserva' => date('Y-m-d H:i:s'),
         'fec_Ingreso' => $startingDate,
         'fec_Salida' => $endingDate,

@@ -11,6 +11,15 @@ class FincasTableSeeder extends Seeder
      */
     public function run()
     {
-         factory(App\Finca::class, 10)->create();
+        
+
+        //factory(App\Finca::class, 10)->create();
+        $fincas = factory(App\Finca::class, 10)->make();
+        
+        $ciudades = App\Ciudad::all();
+        foreach($fincas as $finca)
+        {
+            $ciudades->random()->fincas()->save($finca);
+        }
     }
 }
