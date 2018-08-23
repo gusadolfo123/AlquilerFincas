@@ -30,7 +30,7 @@ class PageController extends Controller
     {
         $fincas = Finca::orderBy('id', 'DESC')->paginate(6);
         $cantReg = Finca::count();
-        
+               
         return view('web.farms', compact(['fincas', 'cantReg']));
     }
 

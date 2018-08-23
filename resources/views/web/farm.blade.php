@@ -102,19 +102,38 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-9 col-md-12 col-sm-12 mt-5">
+                    <section class="slider">
+                        <div class="flexslider">
+                            <ul class="slides">
+                                @foreach($finca->fotos as $foto)
+                                    <li data-thumb="{{ $foto->archivo }}">
+                                        <img src="{{ $foto->archivo }}" />
+                                    </li>
+                                @endforeach                                
+                            </ul>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4 mt-4">
-        <div class="card">
-            <img class="card-img-top" src="img/1.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{ $finca->nombre }}</h5>
-                <p class="card-text">{{ $finca->direccion }}</p>
-                <button type="button" class="btn btn-outline-success">Success</button>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-    </div>
+    @section('scripts')
+        <script type="text/javascript">
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: "thumbnails",
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+        </script>            
+    @endsection
+
 @endsection
+
+

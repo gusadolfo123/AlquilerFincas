@@ -805,8 +805,4 @@ a:hover,
     background-color: #0b6b338a !important;
 }
 
-.card-columns {
-    @include media-breakpoint-only(sm) {
-        column-count: 1;
-    }
-}
+/* GMORNEO PRUEBA 23/08/2018 */

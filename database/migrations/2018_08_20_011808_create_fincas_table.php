@@ -22,6 +22,7 @@ class CreateFincasTable extends Migration
             $table->string('direccion', 128);
             $table->integer('cant_habitaciones');
             $table->integer('cant_banios');
+            $table->integer('max_personas');            
             $table->boolean('sn_jacuzi');
             $table->boolean('sn_piscina');
             $table->string('slug', 128)->unique(); // url amigable

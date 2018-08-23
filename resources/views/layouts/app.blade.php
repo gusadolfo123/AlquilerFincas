@@ -33,7 +33,9 @@
                 <!-- <a class="navbar-brand" href="#">{{ config('app.name', 'Alquiler Fincas') }}</a> -->
                 <!-- <img src="img/loguito.png" width="150" class="d-inline-block align-top myImages" alt=""> -->
                 <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 mt-md-0 mt-4 py-3 text-center">
-                    <img src="img/loguito.png"  class="d-inline-block align-top myImages mw-100" alt="">
+                    <!-- <img src="img/loguito.png"  class="d-inline-block align-top myImages mw-100" alt=""> -->
+                    <img src="{{ asset('img/loguito.png') }}"  class="d-inline-block align-top myImages mw-100" alt="">
+                    
                 </div>
                 <button class="navbar-toggler col-sm-12 color_toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -80,7 +82,7 @@
                     <div class="row pt-4 pb-4">
                         <!-- Grid column -->
                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 mt-md-0 mt-4 py-3 text-center noneDisplay">
-                            <img src="img/loguito.png"  class="d-inline-block align-top myImages mw-100" alt="">
+                            <img src="{{ asset('img/loguito.png') }}"  class="d-inline-block align-top myImages mw-100" alt="">
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-md-0 mt-4 py-3">
                             <i class="fas fa-clock"></i>  <strong>Horario de Atencion:</strong><br> Lunes a Viernes 9:00 AM - 5:00 PM <br> Sábados 10:00 AM - 2:00 PM
@@ -91,7 +93,7 @@
                             <i class="fab fa-whatsapp-square"></i>  <strong>Whatsapp:</strong><br> <a href="https://wa.me/573143151172">3043970363</a> - 24 H
                         </div>
                         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mt-md-0 mt-4 py-3 text-left">
-                            <img src="img/certif.webp " width="75px" class="d-inline-block align-top float-left mr-1" alt="">
+                            <img src="{{ asset('img/certif.webp') }}" width="75px" class="d-inline-block align-top float-left mr-1" alt="">
                             <span> Cada una de nuestras fincas, antes de ser publicada, pasa por un riguroso sistema de verificación de sus propietarios.</span>
                         </div>
                     </div>
@@ -118,7 +120,9 @@
         <script src="{{ asset('js/jquery-ui.multidatespicker.js') }}"></script>
         <script src="{{ asset('js/moment.min.js') }}"></script>
         <script src="{{ asset('js/validator.min.js') }}"></script>
-        
+        <!-- FlexSlider -->
+        <script src="{{ asset('js/jquery.flexslider.js') }}"></script>
+
         <script>
             $(function() {
 

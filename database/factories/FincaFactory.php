@@ -14,6 +14,7 @@ $factory->define(App\Finca::class, function (Faker $faker) {
         'direccion' => $faker->unique()->word(20),
         'cant_habitaciones' => rand(1, 10),
         'cant_banios' => rand(1, 10),
+        'max_personas' => rand(10, 20),
         'sn_jacuzi' => $faker->randomElement([true, false]),
         'sn_piscina' => $faker->randomElement([true, false]),
         'slug' => str_slug($nom),

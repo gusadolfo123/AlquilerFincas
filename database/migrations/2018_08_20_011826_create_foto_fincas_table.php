@@ -15,7 +15,7 @@ class CreateFotoFincasTable extends Migration
     {
         Schema::create('foto_fincas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('archivo', 128)->nullable();
+            $table->string('archivo', 128);
             
             $table->integer('finca_id')->unsigned();
             $table->foreign('finca_id')->references('id')->on('fincas');

@@ -37,7 +37,7 @@
         </div>  
     </div>  
 
-    <!-- <div class="row pt-4 pb-2 ml-2 mr-2 myBody"> -->
+    <!-- <div cl7ass="row pt-4 pb-2 ml-2 mr-2 myBody"> -->
     <div class="row-fluid myBody">
         <div class="container">           
             <div class="row">
@@ -95,9 +95,8 @@
                                 <hr />
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
-                            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 <div class="col-lg-9 col-md-12 col-sm-12 mt-5 mb-5">
                     <div class="card text-success mb-3">
@@ -108,21 +107,33 @@
 
                             <div class="row">
                                 @foreach($fincas as $finca)
-                                    <div class="col-md-4 mt-4">
-                                        <div class="card">
-                                            <img class="card-img-top" src="img/1.jpg" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ $finca->nombre }}</h5>
-                                                <p class="card-text">{{ $finca->direccion }}</p>
-                                                <a class="btn btn-outline-success" href="{{ route('farm', $finca->slug) }}">Detalle</a>
-                                                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                                    <div class="col-md-6">
+                                        <a href="{{ route('farm', $finca->nombre) }}">
+                                            <div class="card bg-dark text-success mt-4">
+                                                <img class="card-img" src="{{ $finca->fotos->first()->archivo }}" alt="Card image">
+                                                <div class="card-img-overlay p-0">
+                                                    <h6 class="card-title">
+                                                        <small class="bg-success text-light rounded pl-1 pr-1">Via: Bogota - Medellin Km 40  </small>
+                                                    </h6>
+                                                </div>
+                                            </div>                                        
+                                            <div class="card-footer border-bottom border-success p-0 pl-2 pr-2">
+                                                <div class="row">
+                                                    <div class="col-6 bg-dark text-light s1 ">
+                                                        <small class="text-light"><i class="fas fa-dollar-sign"></i> {{ number_format($finca->precio_Tbaja, 0) }} Valor Noche</small>
+                                                    </div>
+                                                    <div class="col-6 bg-primary text-light">
+                                                        <small class="text-light"><i class="fas fa-users"></i> Personas: {{ $finca->max_personas }}</small>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                 @endforeach
                             </div>
                             <hr />
-                            {{ $fincas->render() }}
+                            <!-- Paginacion -->
+                            {{ $fincas->render() }} 
                         </div>
                     </div>
                 </div>

@@ -26,4 +26,10 @@ class Finca extends Model
         //return $this->belongsTo(Via::class);
         return $this->belongsTo(Via::class);
     }
+
+    public function fotos()
+    {
+        return $this->hasMany(fotoFinca::class);
+    }
+
 }
