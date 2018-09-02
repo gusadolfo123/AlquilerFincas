@@ -16,6 +16,7 @@ class CreateTemporadasTable extends Migration
         Schema::create('temporadas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion', 20);
+            $table->enum('estado', ['ALTA', 'MEDIA'])->default('ALTA');
             $table->datetime('fecha');
         });
     }

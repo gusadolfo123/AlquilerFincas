@@ -806,3 +806,19 @@ a:hover,
 }
 
 /* GMORNEO PRUEBA 23/08/2018 */
+.flex-direction-nav a {
+    height: 60px !important;
+}
+
+.fondo_transparente {
+    background-color: #ffffff7a !important;
+    border: 2px solid #fff;
+}
+
+.activeClass {
+    background: rgb(233, 152, 152);
+}
+
+.day disabled {
+    background: rgb(97, 93, 93);
+}

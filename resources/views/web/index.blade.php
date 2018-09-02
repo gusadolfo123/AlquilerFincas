@@ -5,35 +5,36 @@
 <div class="row-fluid">
     <!-- <div class="col-12 bg-primary py-3"> Fondo Azul -->
     <div class="col-12 bg-dark py-3 border border-right-0 border-left-0 border-top-0 border-success">        
-        <div class="form-row align-items-end">
+        <form name="formSearch" id="formSearch" action="{{ url('/fincas') }}" method="POST" class="form-row align-items-end">    
+            {{ csrf_field() }}
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 two-fields">
                 <div class="form-group text-center">     
                     <label for="datePickerEntrada" class="text-white">Fechas</label> 
                     <div class="input-group">    
-                        <input id="datePickerEntrada"  class="form-control" placeholder="Entrada" readonly="readonly">  
-                        <input id="datePickerSalida" class="form-control" placeholder="Salida" readonly="readonly">
+                        <input id="datePickerEntrada" name="fecEntrada"  class="form-control" placeholder="Entrada" readonly="readonly" required>  
+                        <input id="datePickerSalida" name="fecSalida" class="form-control" placeholder="Salida" readonly="readonly" required>
                     </div>      
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 two-fields">
                 <div class="form-group text-center">     
-                    <label for="datePickerEntrada" class="text-white">Cantidad Huespedes</label> 
+                    <label class="text-white">Cantidad Huespedes</label> 
                     <div class="input-group">    
-                        <input id="cantAdultos"  class="form-control" type="number" placeholder="Adultos">                
-                        <input id="cantNinos"  class="form-control"  type="number" placeholder="Niños">   
+                        <input id="cantAdultos" name="cantAdultos"  class="form-control" type="number" placeholder="Adultos" required>                
+                        <input id="cantNinos" name="cantNinos"  class="form-control"  type="number" placeholder="Niños" required>   
                     </div>   
                 </div>
             </div> 
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="form-group text-center">     
                     <label for="txtDepartamento" class="text-white">Departamento</label> 
-                    <input id="txtDepartamento"  class="form-control" type="text" placeholder="Departamento">                
+                    <input id="txtDepartamento" name="departamento" class="form-control" type="text" placeholder="Departamento" required>                
                 </div>
             </div>      
             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pb-3">
                 <button type="submit" class="btn btn-success btn-lg btn-block btn-md hbutton">Buscar</button>
-            </div>       
-        </div>
+            </div>
+        </form>
     </div>  
 </div>  
 
@@ -93,21 +94,5 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
-
-
-@section('scripts')
-<script type="text/javascript">
-
-    var locations = [
-                        @foreach ($fechas as $fecha)
-                            [ "{{ $fecha->fecha }}" ], 
-                        @endforeach
-                    ];
-
-console.log(locations);
-
-</script>
-@endsection
 
 @endsection
