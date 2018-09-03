@@ -112,11 +112,11 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <i class="fas fa-trash"></i> <a href="#">Quitar Filtros</a>
+                                    <i class="fas fa-trash"></i> <a href="{{ url('/fincas') }}">Quitar Filtros</a>
                                 </div>
                             </div>
                             <hr />
-                            <button type="button" class="btn btn-primary" onclick="filtrar();" >Submit</button>
+                            <button type="button" class="btn btn-primary" onclick="filtrar();" >Filtrar</button>
                         </form>
                     </div>
                 </div> 

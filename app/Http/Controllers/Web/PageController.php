@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers\Web;
 
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Finca;
@@ -11,11 +16,6 @@ use App\Reserva;
 use App\Ciudad;
 use App\Quotation;
 use DB;
-use Illuminate\Support\Collection;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Model;
 
 
 class PageController extends Controller
@@ -41,38 +41,25 @@ class PageController extends Controller
     }
 
 
-    public function company()
+    public function events()
     {
-        return view("web.company");
+        return view("web.events");
     }
 
-    // public function farms()
-    // {
-    //     $fechas = Temporada::all();
-    //     $fincas = Finca::orderBy('id', 'DESC')->paginate(6);
-    //     $cantReg = Finca::count();
-    //     $vias = Via::all();        
-
-    //     return view('web.farms', compact(['fincas', 'cantReg', 'vias', 'fechas']));
-    // }
-
-
-
-    public function AplicarFiltros(Request $request){
+    public function AplicarFiltros(Request $request)
+    {
         
-        //dd(request()->all());
-        
+        $filtros = request()->all();
         $data = session()->get('data');
-        //dd($data);
+        
         if($data == null)
         {
-            $fincas = Finca::Filtros($data)->paginate(100);
-            $cantReg = Finca::Filtros($data)->count();
+            $fincas = Finca::Filtros($data, $filtros)->paginate(6);
+            $cantReg = Finca::Filtros($data, $filtros)->count();
 
         }else{
             
-            $fincasR = Finca::Filtros($data);
-            
+            $fincasR = Finca::Filtros($data, $filtros);            
 
             $fincasTmp = collect(new Finca);
             $viasC = collect(new Via);
@@ -101,52 +88,45 @@ class PageController extends Controller
 
             }
 
-            // Get current page form url e.x. &page=1
             $currentPage = LengthAwarePaginator::resolveCurrentPage();
-            
-            // Create a new Laravel collection from the array data
-            //$itemCollection = collect($arrayPrueba);
-    
-            // Define how many items we want to be visible in each page
-            $perPage = 100;
-    
-            // Slice the collection to get the items to display in current page
+            $perPage = 6;
             $currentPageItems = $fincasTmp->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-    
-            // Create our paginator and pass it to the view
             $fincas= new LengthAwarePaginator($currentPageItems , count($fincasTmp), $perPage);
     
-            // set url path for generted links
-            $fincas->setPath($request->url());
-
             $cantReg = count($fincasTmp);   
-            
-            //dd($fincas);
-
         }
+
+        $fincas->setPath(url()->current());
 
         return view('web.list.listFarms ', compact(['fincas', 'cantReg']));
     }
 
     public function farms(Request $request)
     {
+        
         $data = request()->all();
         $fechas = Temporada::all();
         
-
-        if($data == null || ($data != null  && !isset($data['post']) && !isset($data['departamento'])))
+        if($data == null || ($data != null  && !isset($data['p']) && !isset($data['departamento'])))
         {
-            $request->session()->forget('data');
+            $request->session()->forget('data');            
             $fechas = Temporada::all();
             $fincas = Finca::orderBy('id', 'DESC')->paginate(6);
             $cantReg = Finca::count();
             $vias = Via::all();        
             
-            return view('web.farms', compact(['fincas', 'cantReg', 'vias', 'fechas']));
+            if($request->ajax())
+                return view('web.list.listFarms ', compact(['fincas', 'cantReg']));
+            else
+                return view('web.farms', compact(['fincas', 'cantReg', 'vias', 'fechas']));
         }
         
+        
+
         if(!isset($data['departamento']))
             $data = session()->get('data');
+
+        
 
         /* Sirve pero sin Verse en el View */
         $sql = "SELECT  f.*
@@ -234,8 +214,11 @@ class PageController extends Controller
  
         // set url path for generted links
         $fincas->setPath($request->url());
-
-        return view('web.farms', compact(['fincas', 'cantReg', 'vias', 'data', 'fechas']));
+        //dd($fincas);
+        if($request->ajax())
+                return view('web.list.listFarms ', compact(['fincas', 'cantReg', 'data']));
+            else
+                return view('web.farms', compact(['fincas', 'cantReg', 'vias', 'fechas', 'data']));
 
     }
 

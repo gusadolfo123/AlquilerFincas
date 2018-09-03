@@ -36,7 +36,7 @@
     <hr />
 
     @if(isset($data))
-        {{ $fincas->appends(['post' => 'true'])->links() }}
+        {{ $fincas->appends(['p' => 'true'])->links() }}
     @else
         {{ $fincas->links() }}
     @endif

@@ -56,7 +56,7 @@
                             <a class="nav-link" href="{{ url('/fincas') }}">Nuestras Fincas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/empresariales') }}">Eventos Empresariales</a>
+                            <a class="nav-link" href="{{ url('/eventos') }}">Eventos Empresariales</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/contacto') }}">Contacto</a>

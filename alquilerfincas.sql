@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 29-08-2018 a las 13:44:30
+-- Tiempo de generación: 02-09-2018 a las 16:28:36
 -- Versión del servidor: 5.7.21
 -- Versión de PHP: 7.2.4
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `fincas` (
   UNIQUE KEY `fincas_slug_unique` (`slug`),
   KEY `fincas_via_id_foreign` (`via_id`),
   KEY `fincas_ciudad_id_foreign` (`ciudad_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `fincas`
@@ -124,7 +124,13 @@ INSERT INTO `fincas` (`id`, `nombre`, `descripcion`, `precio_Tbaja`, `precio_Tal
 (7, 'blanditiis', 'Quaerat aliquam veritatis ut commodi aut quia. Officiis veniam perspiciatis iste sed asperiores commodi. Inventore provident in aspernatur dolorum et fuga. Repudiandae maiores quo nisi nisi. Accusamus sit odio sapiente ut incidunt unde. Et aut sed natus quam consequatur. Animi aut error ut est. Esse quibusdam voluptates sunt omnis voluptatem omnis rem. Eum qui molestiae praesentium nemo quisquam. Architecto assumenda ipsa dolor animi iste iure odio omnis.', '82556.00', '81133.00', 'ut', 7, 3, 13, 1, 0, 'blanditiis', 4, 3),
 (8, 'eum', 'Rerum optio totam voluptatibus non consequatur. Culpa minima reprehenderit harum odit velit ad. Et nobis ut cumque qui fugiat deserunt. Aut incidunt odit in voluptatem molestiae. Voluptatem et est suscipit sunt repellendus. Cum voluptatem facere sapiente et ea. Iste voluptatibus totam perferendis dignissimos voluptas odio.', '79396.00', '65655.00', 'omnis', 7, 9, 19, 0, 0, 'eum', 3, 2),
 (9, 'eos', 'Vitae omnis ipsa assumenda cum amet omnis. Est aliquid delectus in veritatis dolorem sit commodi. Itaque voluptatem ullam quia. Illum sunt maxime dolor ut voluptate tenetur rerum. Eum architecto facere doloremque et aut et quae. Adipisci sed fugiat praesentium officiis at hic. Dolorem nulla voluptatibus eligendi consequatur. Minima minima facere molestiae corrupti velit aspernatur non. Modi voluptatibus porro laborum. Eveniet dolorum temporibus et odit non adipisci.', '59598.00', '87667.00', 'molestiae', 3, 10, 20, 0, 0, 'eos', 4, 7),
-(10, 'qui', 'Enim soluta sint fugit eos itaque. Voluptatibus voluptas iste non quod molestiae. Nihil perferendis soluta labore reprehenderit esse animi quo. Eveniet ullam cupiditate incidunt minima. Exercitationem assumenda et repudiandae sunt qui sequi nihil dolores. Nam delectus et assumenda quis cumque autem. Cupiditate quae accusantium iusto itaque molestiae accusamus odit. Consequatur consequatur dolorem impedit nam qui. Amet quos quos nisi sint.', '80665.00', '97935.00', 'fugit', 7, 5, 19, 1, 1, 'qui', 4, 1);
+(10, 'qui', 'Enim soluta sint fugit eos itaque. Voluptatibus voluptas iste non quod molestiae. Nihil perferendis soluta labore reprehenderit esse animi quo. Eveniet ullam cupiditate incidunt minima. Exercitationem assumenda et repudiandae sunt qui sequi nihil dolores. Nam delectus et assumenda quis cumque autem. Cupiditate quae accusantium iusto itaque molestiae accusamus odit. Consequatur consequatur dolorem impedit nam qui. Amet quos quos nisi sint.', '80665.00', '97935.00', 'fugit', 7, 5, 19, 1, 1, 'qui', 4, 1),
+(11, 'La Finca 1', 'Descripcion de la Finca 1', '99500.00', '150000.00', 'Cll Falsa 123', 2, 1, 5, 0, 1, 'La-Finca-1', 6, 6),
+(12, 'La Finca 2', 'Descripcion de la Finca 2', '99500.00', '150000.00', 'Cll 75 b 123', 6, 2, 10, 0, 1, 'La-Finca-2', 6, 6),
+(13, 'La Finca 3', 'Descripcion de la Finca 3', '75900.00', '120000.00', 'Cll 25 a 75 ', 8, 2, 16, 1, 1, 'La-Finca-3', 1, 6),
+(14, 'La Finca 4', 'Descripcion de la Finca 4', '28763.00', '189900.00', 'Cll Falsa 8888', 3, 1, 6, 1, 1, 'La-Finca-4', 2, 6),
+(15, 'La Finca 5', 'Descripcion de la Finca 5', '60000.00', '145500.00', 'Cll Falsa 7777', 2, 1, 4, 1, 1, 'La-Finca-5', 3, 6),
+(16, 'La Finca 6', 'Descripcion de la Finca 6', '55000.00', '120000.00', 'Cll Falsa +9999', 4, 2, 8, 0, 1, 'La-Finca-6', 4, 6);
 
 -- --------------------------------------------------------
 
@@ -139,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `foto_fincas` (
   `finca_id` int(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   KEY `foto_fincas_finca_id_foreign` (`finca_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `foto_fincas`
@@ -175,7 +181,13 @@ INSERT INTO `foto_fincas` (`id`, `archivo`, `finca_id`) VALUES
 (27, 'https://lorempixel.com/1200/600/?61225', 9),
 (28, 'https://lorempixel.com/1200/600/?66081', 8),
 (29, 'https://lorempixel.com/1200/600/?18529', 4),
-(30, 'https://lorempixel.com/1200/600/?79320', 10);
+(30, 'https://lorempixel.com/1200/600/?79320', 10),
+(31, 'https://lorempixel.com/1200/600/?76410', 11),
+(32, 'https://lorempixel.com/1200/600/?76410', 12),
+(33, 'https://lorempixel.com/1200/600/?76410', 13),
+(34, 'https://lorempixel.com/1200/600/?76410', 14),
+(35, 'https://lorempixel.com/1200/600/?76410', 15),
+(36, 'https://lorempixel.com/1200/600/?76410', 16);
 
 -- --------------------------------------------------------
 
@@ -257,9 +269,9 @@ INSERT INTO `reservas` (`id`, `finca_id`, `cliente_id`, `fec_Reserva`, `fec_Ingr
 (6, 1, 2, '2018-08-29 13:38:49', '2018-09-03 15:33:17', '2018-09-04 04:13:50', '50000.00', 'Aliquid id sint nostrum consequatur quae velit et. Et et deleniti tenetur. Ea aperiam dolores eaque temporibus ut. Labore vel cupiditate non occaecati atque. Sit totam et non ab. Occaecati dolor nam enim dicta. Ut ad et voluptatibus dolorum in possimus. Omnis enim qui inventore praesentium vero velit dicta. Et quasi asperiores doloremque saepe ex deleniti alias deserunt. Nisi amet numquam harum eos fugiat beatae commodi magnam. Soluta dolorem quos qui porro veritatis.', 2, 2, 'CONFIRMADO'),
 (7, 8, 9, '2018-08-29 13:38:49', '2018-09-03 11:14:13', '2018-09-04 05:05:32', '50000.00', 'Quia accusantium iusto neque. Voluptas doloremque aut deleniti tempore quo ex asperiores. Et ut natus aut culpa. Hic et consectetur nesciunt eum omnis qui. Exercitationem omnis tenetur est laboriosam non tempore omnis. Corrupti libero consequatur illo omnis eum placeat. Voluptas est et corrupti delectus ut dolorum. Commodi id excepturi ducimus fugiat rerum voluptatum.', 6, 8, 'CONFIRMADO'),
 (8, 1, 3, '2018-08-29 13:38:49', '2018-09-03 11:06:13', '2018-09-04 13:02:08', '50000.00', 'Aspernatur est amet iste voluptatem maiores. Ducimus officia illum nam molestias est. In consequatur aliquid sed aut consequuntur rerum. Molestias dolore nam cupiditate sint. Beatae quia iure rerum provident illum illo. Eveniet sequi quis earum. Aliquam beatae cupiditate id amet laboriosam temporibus. Neque iste ut omnis. Aliquam odio id cupiditate porro accusantium.', 4, 4, 'CONFIRMADO'),
-(9, 6, 4, '2018-08-29 13:38:49', '2018-08-27 23:36:31', '2018-09-03 23:23:39', '50000.00', 'Sed quia et et eveniet voluptatibus. Officiis aspernatur est est est provident ad. Pariatur voluptatem autem reiciendis expedita voluptas. Molestiae voluptatem sed sapiente. Ut at nihil mollitia aut sit vel. Quia voluptatibus ad sequi optio et earum reiciendis. Voluptatibus dolores fuga dolorem in pariatur vel. Eius ipsum id inventore nemo ad est sit.', 9, 3, 'CONFIRMADO'),
+(9, 6, 4, '2018-08-29 13:38:49', '2018-08-27 23:36:31', '2018-08-31 23:23:39', '50000.00', 'Sed quia et et eveniet voluptatibus. Officiis aspernatur est est est provident ad. Pariatur voluptatem autem reiciendis expedita voluptas. Molestiae voluptatem sed sapiente. Ut at nihil mollitia aut sit vel. Quia voluptatibus ad sequi optio et earum reiciendis. Voluptatibus dolores fuga dolorem in pariatur vel. Eius ipsum id inventore nemo ad est sit.', 9, 3, 'CONFIRMADO'),
 (10, 6, 4, '2018-08-29 13:38:49', '2018-09-02 10:24:57', '2018-09-04 06:21:42', '50000.00', 'Quia nostrum iure dolores mollitia. Voluptatem aspernatur alias totam assumenda culpa. Voluptatem odio consequatur tempore magni quisquam est mollitia. Consectetur quis dolor nemo cupiditate. Ipsam expedita et porro amet accusamus. Fugiat consequatur iure quia. Architecto quis quia fugit dicta dolorum. Ut provident et dolores iure. Aut eveniet distinctio sunt totam qui corrupti quasi.', 5, 8, 'VERIFICACION'),
-(11, 7, 10, '2018-08-29 13:38:49', '2018-09-01 10:45:42', '2018-09-01 12:06:33', '50000.00', 'Impedit sit et ea harum suscipit suscipit a. Atque qui velit ducimus saepe accusantium. Aliquam praesentium sint dolorem id. Distinctio aut possimus dolorem aut. Incidunt aut omnis optio. Sit recusandae sed neque voluptatibus cupiditate id. Est qui ipsa soluta ipsum. Accusantium molestiae et alias ea voluptate ut distinctio.', 10, 8, 'CONFIRMADO'),
+(11, 6, 10, '2018-08-29 13:38:49', '2018-09-01 10:45:42', '2018-09-01 12:06:33', '50000.00', 'Impedit sit et ea harum suscipit suscipit a. Atque qui velit ducimus saepe accusantium. Aliquam praesentium sint dolorem id. Distinctio aut possimus dolorem aut. Incidunt aut omnis optio. Sit recusandae sed neque voluptatibus cupiditate id. Est qui ipsa soluta ipsum. Accusantium molestiae et alias ea voluptate ut distinctio.', 10, 8, 'CONFIRMADO'),
 (12, 9, 4, '2018-08-29 13:38:49', '2018-08-29 10:18:48', '2018-08-31 19:07:42', '50000.00', 'Quia deleniti dignissimos et possimus. Perferendis unde recusandae debitis. Ut nihil vel minus consequatur rem et repellendus et. Qui in repellendus molestiae rerum aut consequatur officia. Magni nihil consequatur ex sint modi maiores. Sunt vel pariatur officia qui amet. Doloribus non asperiores ut laboriosam ut. Cupiditate enim voluptatem fugiat ducimus dolor ea ut et. Magni dolor eos quam quisquam nostrum animi dicta. Accusamus veniam odio aut dolor quam aut.', 3, 4, 'CONFIRMADO'),
 (13, 6, 2, '2018-08-29 13:38:49', '2018-09-01 00:31:19', '2018-09-03 02:58:53', '50000.00', 'In vel ad reiciendis sint fuga quidem. Repellendus atque in accusantium sunt ab et. Deserunt animi sequi eum. Accusantium esse reiciendis sapiente laboriosam possimus officiis repellat. Officia vel et fugit nobis et accusamus nobis. Voluptatibus id neque placeat quis. Qui dolores molestias magni. In rem atque libero adipisci. Laboriosam maiores ut et distinctio ipsam. Consequatur quam consectetur est eaque mollitia libero aut. Amet nobis et suscipit reprehenderit eum.', 10, 1, 'VERIFICACION'),
 (14, 1, 8, '2018-08-29 13:38:49', '2018-08-28 14:29:21', '2018-09-01 19:27:51', '50000.00', 'Et fuga eum et rem vel iusto deleniti qui. Rerum pariatur minima amet. Labore ratione totam tempora voluptas ut fugiat. Omnis tenetur eius et. Ut qui eum dolore sint. Natus iure ullam ab error. Architecto in expedita aut laboriosam quaerat. In eligendi aut tempore velit qui ut. Incidunt temporibus ducimus vel est et. Assumenda molestiae velit laboriosam sed qui sequi accusamus placeat. Commodi et laboriosam dignissimos.', 9, 4, 'CONFIRMADO'),
@@ -269,10 +281,10 @@ INSERT INTO `reservas` (`id`, `finca_id`, `cliente_id`, `fec_Reserva`, `fec_Ingr
 (18, 2, 8, '2018-08-29 13:38:49', '2018-08-28 10:05:24', '2018-08-30 19:42:54', '50000.00', 'Omnis quasi eius ut amet modi. Accusamus accusantium doloremque maxime id nesciunt velit itaque. Aut eius eum aut culpa fugiat. Dolore qui exercitationem quibusdam corrupti. Est in distinctio dolore expedita voluptatem et tempore. Dolorem rerum est officiis a. Eum et sapiente qui. Qui quis ut officia sit totam aperiam quos. Incidunt eos natus et nostrum voluptas dolorum aliquid dolor. Nulla autem non error quos nihil autem quibusdam. Eius magnam error pariatur qui et.', 1, 9, 'CONFIRMADO'),
 (19, 10, 6, '2018-08-29 13:38:49', '2018-09-02 03:24:25', '2018-09-02 04:11:18', '50000.00', 'Iure omnis voluptate nisi laudantium porro ea magnam. Placeat doloremque qui nihil ab velit iste ipsam. Expedita dignissimos pariatur ipsum maiores. Sequi itaque porro omnis aut veritatis sit. Omnis omnis sed sapiente et qui deserunt delectus. Facere illo non est fugit quis aperiam a. Quibusdam quia impedit et est consequatur deleniti. Quis officia consectetur quia.', 1, 1, 'VERIFICACION'),
 (20, 7, 5, '2018-08-29 13:38:49', '2018-08-28 15:03:44', '2018-08-29 00:44:58', '50000.00', 'Voluptas alias voluptas consequatur. Sed impedit incidunt est numquam odit non. Porro earum deserunt ut dolor quo facere perferendis suscipit. Quam recusandae nihil et. Libero doloremque qui enim nostrum ab qui. Blanditiis nisi quod ut ad quaerat ullam. Non non in nostrum iure. Corporis reiciendis veritatis quia qui odit voluptatem.', 2, 5, 'CONFIRMADO'),
-(21, 7, 6, '2018-08-29 13:38:49', '2018-09-02 02:14:56', '2018-09-02 22:31:03', '50000.00', 'Nihil eos provident sunt qui numquam qui ut omnis. Aperiam eligendi id facilis enim assumenda in eum. Vel ut quaerat aut et. Aut enim qui voluptas magni. Temporibus iste sint sed unde est hic et labore. Tempora sint eaque cum qui. Ipsam voluptatibus modi cupiditate rerum. Iste ullam nulla sit molestiae. Asperiores omnis iure et exercitationem pariatur ipsum. Earum id consequatur eum quae. Sit perspiciatis est earum itaque dicta laboriosam quo.', 10, 1, 'CONFIRMADO'),
+(21, 6, 6, '2018-08-29 13:38:49', '2018-09-02 02:14:56', '2018-09-02 22:31:03', '50000.00', 'Nihil eos provident sunt qui numquam qui ut omnis. Aperiam eligendi id facilis enim assumenda in eum. Vel ut quaerat aut et. Aut enim qui voluptas magni. Temporibus iste sint sed unde est hic et labore. Tempora sint eaque cum qui. Ipsam voluptatibus modi cupiditate rerum. Iste ullam nulla sit molestiae. Asperiores omnis iure et exercitationem pariatur ipsum. Earum id consequatur eum quae. Sit perspiciatis est earum itaque dicta laboriosam quo.', 10, 1, 'CONFIRMADO'),
 (22, 1, 1, '2018-08-29 13:38:49', '2018-09-03 11:31:32', '2018-09-03 11:54:53', '50000.00', 'Qui mollitia iusto exercitationem omnis rerum quod aliquid. In minus vel modi iste fugiat in repellat. Porro nobis nobis molestiae architecto. Minima quae corporis adipisci dicta. Quo alias ut ut qui. Amet expedita ut sequi vitae. Aliquid eligendi quo ad quos perspiciatis sunt. Officia laboriosam architecto et autem. Est est fuga consectetur aut. Atque repellat modi quae voluptatem. Voluptates magni aut magni excepturi minima reprehenderit.', 4, 1, 'CONFIRMADO'),
 (23, 6, 9, '2018-08-29 13:38:49', '2018-09-03 11:34:14', '2018-09-03 13:03:47', '50000.00', 'Quibusdam ex vel maxime qui. Dolor velit aut possimus nemo esse autem. Ullam iste sapiente et eveniet vel. Et rerum error quidem laboriosam tenetur nam. Vitae nulla sed porro est. Necessitatibus ab exercitationem cum. Deserunt autem optio temporibus et libero. Enim fugit voluptatem delectus nulla incidunt cum atque consequatur. Quidem dolore provident facere deleniti optio commodi sint rerum. Labore iure odio consequatur consectetur dolor aut et.', 8, 10, 'CONFIRMADO'),
-(24, 5, 2, '2018-08-29 13:38:49', '2018-08-27 22:09:41', '2018-09-02 16:15:15', '50000.00', 'Explicabo et itaque voluptatem qui voluptas impedit ea. Praesentium beatae dolores sit omnis repudiandae. Et id error architecto eligendi. Tenetur excepturi libero dolores sed. Omnis ullam consequuntur laboriosam nihil amet. Ea quia eveniet deleniti. Ipsam quam est voluptatem iusto tenetur quia expedita. Tempora atque consequuntur facere voluptatum. Ducimus aliquid totam rem. Ratione et enim laborum labore quis.', 2, 8, 'CONFIRMADO'),
+(24, 5, 2, '2018-08-29 13:38:49', '2018-08-27 22:09:41', '2018-08-30 16:15:15', '50000.00', 'Explicabo et itaque voluptatem qui voluptas impedit ea. Praesentium beatae dolores sit omnis repudiandae. Et id error architecto eligendi. Tenetur excepturi libero dolores sed. Omnis ullam consequuntur laboriosam nihil amet. Ea quia eveniet deleniti. Ipsam quam est voluptatem iusto tenetur quia expedita. Tempora atque consequuntur facere voluptatum. Ducimus aliquid totam rem. Ratione et enim laborum labore quis.', 2, 8, 'CONFIRMADO'),
 (25, 6, 10, '2018-08-29 13:38:49', '2018-09-01 19:57:13', '2018-09-01 23:35:57', '50000.00', 'Et accusantium odit iste quas eligendi. Itaque aut molestiae aut et eum. Officia voluptate voluptates omnis omnis labore ipsum id. Dolorem nostrum voluptas illum similique. Consequatur aut aspernatur explicabo voluptas qui sed illum. Natus saepe maxime dolor in.', 1, 5, 'CONFIRMADO'),
 (26, 9, 2, '2018-08-29 13:38:49', '2018-08-30 21:43:09', '2018-09-01 06:29:16', '50000.00', 'Explicabo fuga vel voluptas officia eveniet aut tempora. Nam repellendus totam cumque. Delectus iste necessitatibus tempore architecto. Omnis neque aliquam fuga unde inventore et eligendi debitis. Fugit eveniet ut consequuntur consequatur. Vitae magni eligendi doloribus nesciunt debitis.', 1, 8, 'VERIFICACION'),
 (27, 2, 3, '2018-08-29 13:38:49', '2018-09-02 04:13:18', '2018-09-04 05:43:06', '50000.00', 'Voluptatem temporibus molestiae vitae voluptas sed neque omnis. Error dolor aut vel nemo tempore. Laboriosam at mollitia autem ut consequatur vel repellat labore. Praesentium ad quae earum corrupti qui qui fugit. Sunt sit quos qui non non tenetur consequuntur. Aut incidunt aspernatur temporibus. Et distinctio fuga est aut. Adipisci exercitationem in voluptas iure.', 10, 6, 'CONFIRMADO'),
@@ -385,12 +397,12 @@ CREATE TABLE IF NOT EXISTS `vias` (
 --
 
 INSERT INTO `vias` (`id`, `descripcion`) VALUES
-(1, 'Pariatur illo ut et. Minus et error doloribus ut ea itaque quo. Ipsum veritatis sed eaque dolor adipisci.'),
-(2, 'Atque expedita aut consequatur sed unde. Repudiandae aut illum vel in tempora deserunt. Quam dolor excepturi suscipit cumque eum quia sit. Voluptatem earum sit aut eaque eius praesentium.'),
-(3, 'Corporis sit libero iure et rerum dolor quia. Nihil alias est minus blanditiis. Illum error harum dolorem et maiores minus. Magnam cum accusamus eum et ducimus.'),
-(4, 'Iure corrupti aspernatur aliquam omnis quaerat neque. Sed dolorem non excepturi nisi officia delectus minima. Laboriosam consequuntur nihil nobis quia aut omnis.'),
-(5, 'Sunt deserunt consectetur aut quibusdam quo doloremque exercitationem. Sint dolor rerum error quos eveniet. Rerum incidunt est quod voluptatem temporibus quisquam.'),
-(6, 'Placeat tempora qui sint ut hic deserunt. Sunt modi dolorem ad adipisci ut. Consequatur quis culpa hic quia voluptatem. Temporibus neque voluptatem qui aut doloremque doloribus.');
+(1, 'Bogota - Medellin'),
+(2, 'Bogota - Boyaca'),
+(3, 'Cali - Cartagena'),
+(4, 'Villao - Bogota'),
+(5, 'Cota - La Vega'),
+(6, 'La Vega - Cota');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

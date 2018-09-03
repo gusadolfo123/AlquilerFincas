@@ -36,11 +36,49 @@ $(document).on("click", ".pagination a", function(e) {
             .attr("href")
             .split("page=")[1];
 
-        getFarm(page);
+        getFarmsWithFilter(page);
+
+        return;
+    }
+
+    if (
+        $(this)
+            .attr("href")
+            .indexOf("fincas") != -1
+    ) {
+        e.preventDefault();
+
+        var page = $(this)
+            .attr("href")
+            .split("page=")[1];
+
+        if (
+            $(this)
+                .attr("href")
+                .indexOf("p=true") != -1
+        ) {
+            getFarms(page, true);
+        } else {
+            getFarms(page);
+        }
+
+        return;
     }
 });
 
-function getFarm(page) {
+function getFarms(page, post = false) {
+    if (post) {
+        $.ajax({ url: "fincas?p=true&page=" + page }).done(function(data) {
+            $("#contFincas").html(data);
+        });
+    } else {
+        $.ajax({ url: "fincas?page=" + page }).done(function(data) {
+            $("#contFincas").html(data);
+        });
+    }
+}
+
+function getFarmsWithFilter(page) {
     $.ajax({ url: "filtrarFincas?page=" + page }).done(function(data) {
         $("#contFincas").html(data);
     });
