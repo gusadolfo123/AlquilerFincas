@@ -48,17 +48,25 @@ class Finca extends Model
             if($filtros == null)
                 $resultado = $query;
             else{
+                //dd($filtros);
                 
-                $via_id = (int)$filtros['via'];
+                $via_id = $filtros['via'];
+
+                //dd($via_id);
                 $resultado = $query->where([
                                             ['sn_jacuzi', filter_var($filtros['snJacuzi'], FILTER_VALIDATE_BOOLEAN)],
                                             ['sn_piscina', filter_var($filtros['snPiscina'], FILTER_VALIDATE_BOOLEAN)],
                                             ['cant_banios', '>=', (int)$filtros['banios']],
                                             ['cant_habitaciones', '>=', (int)$filtros['habitaciones']]
                                           ])
-                                    ->whereHas('via', function($query) use ($via_id){
-                                         $query->where('id', $via_id);
-                                    });
+                                           ->whereHas('via', function($query) use ($via_id){
+                                                if ($via_id != "undefined")
+                                                    $query->where('id',(int)$via_id);
+                                             });
+                                          
+                                    // ->whereHas('via', function($query) use ($via_id){
+                                    //      $query->where('id', $via_id);
+                                    // });
             }
 
          
@@ -104,38 +112,40 @@ class Finca extends Model
                                             $data['cantNinos'], $data['fecSalida'], $data['departamento'], $data['cantAdultos'], $data['cantNinos'])));
         }else
         {
+            if ($filtros['via'] == "undefined") $filtros['via'] = null;
+
             $sql = "SELECT  f.*
                     FROM    fincas f JOIN ciudads c
                                 ON  f.ciudad_id = c.id AND
                                     c.descripcion =?  AND
                                     f.max_personas >= ? + ? AND
-                                    f.cant_banios >= ? AND
-                                    f.cant_habitaciones >= ? AND
-                                    f.sn_jacuzi >= ? AND
-                                    f.sn_piscina >= ?
+                                    f.cant_banios >= IFNULL(?, f.cant_banios) AND
+                                    f.cant_habitaciones >= IFNULL(?, f.cant_habitaciones) AND
+                                    f.sn_jacuzi = IFNULL(?, f.sn_jacuzi) AND
+                                    f.sn_piscina = IFNULL(?, f.sn_piscina)
                             JOIN reservas r
                                 ON  r.finca_id = f.id AND
                                     r.estado = 'VERIFICACION'
                             JOIN vias v
                                 ON	f.via_id = v.id AND
-                                    v.id = ?
+                                    v.id = IFNULL(?, v.id)
                     UNION
                     SELECT  f.*
                     FROM    fincas f JOIN ciudads c
                                 ON  f.ciudad_id = c.id AND
                                     c.descripcion =? AND
                                     f.max_personas >= ? + ? AND
-                                    f.cant_banios >= ? AND
-                                    f.cant_habitaciones >= ? AND
-                                    f.sn_jacuzi >= ? AND
-                                    f.sn_piscina >= ?
+                                    f.cant_banios >= IFNULL(?, f.cant_banios) AND
+                                    f.cant_habitaciones >= IFNULL(?, f.cant_habitaciones) AND
+                                    f.sn_jacuzi = IFNULL(?, f.sn_jacuzi) AND
+                                    f.sn_piscina = IFNULL(?, f.sn_piscina)
                             JOIN reservas r
                                 ON  r.finca_id = f.id AND
                                     r.estado = 'CONFIRMADO' AND
-                                    r.fec_Salida < ?
+                                    r.fec_Salida < IFNULL(?, r.fec_Salida)
                             JOIN vias v
                                 ON	f.via_id = v.id AND
-                                    v.id = ?
+                                    v.id = IFNULL(?, v.id)
                     UNION
                     SELECT  f.*
                     FROM    fincas f JOIN ciudads c
@@ -143,28 +153,27 @@ class Finca extends Model
                                     c.descripcion =? AND
                                     f.id NOT IN (SELECT finca_id FROM reservas) AND
                                     f.max_personas >= ? + ? AND
-                                    f.cant_banios >= ? AND
-                                    f.cant_habitaciones >= ? AND
-                                    f.sn_jacuzi >= ? AND
-                                    f.sn_piscina >= ?
+                                    f.cant_banios >= IFNULL(?, f.cant_banios) AND
+                                    f.cant_habitaciones >= IFNULL(?, f.cant_habitaciones) AND
+                                    f.sn_jacuzi = IFNULL(?, f.sn_jacuzi) AND
+                                    f.sn_piscina = IFNULL(?, f.sn_piscina)
                             JOIN vias v
                                 ON	f.via_id = v.id AND 
-                                    v.id = ?    ";
+                                    v.id = IFNULL(?, v.id)    ";
 
             $collection = collect(DB::select($sql,array($data['departamento'], 
                                             $data['cantAdultos'], $data['cantNinos'],
                                             $filtros['banios'], $filtros['habitaciones'],
-                                            $filtros['snJacuzi'], $filtros['snPiscina'], $filtros['via'],                                            
+                                            filter_var($filtros['snJacuzi'], FILTER_VALIDATE_BOOLEAN), filter_var($filtros['snPiscina'], FILTER_VALIDATE_BOOLEAN), $filtros['via'],
                                             $data['departamento'], $data['cantAdultos'], 
                                             $data['cantNinos'], 
                                             $filtros['banios'], $filtros['habitaciones'],
-                                            $filtros['snJacuzi'], $filtros['snPiscina'], 
+                                            filter_var($filtros['snJacuzi'], FILTER_VALIDATE_BOOLEAN), filter_var($filtros['snPiscina'], FILTER_VALIDATE_BOOLEAN),
                                             $data['fecSalida'], $filtros['via'],                                            
                                             $data['departamento'], $data['cantAdultos'], $data['cantNinos'],
                                             $filtros['banios'], $filtros['habitaciones'],
-                                            $filtros['snJacuzi'], $filtros['snPiscina'], $filtros['via'])));
+                                            filter_var($filtros['snJacuzi'], FILTER_VALIDATE_BOOLEAN), filter_var($filtros['snPiscina'], FILTER_VALIDATE_BOOLEAN), $filtros['via'])));
         }
-
         return $collection;      
 
     }

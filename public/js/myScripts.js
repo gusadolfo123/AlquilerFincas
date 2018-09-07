@@ -24,6 +24,12 @@ function filtrar() {
     );
 }
 
+function detailFarm(id) {
+    alert(id);
+}
+
+// $(document).on("click", "", function(e) {});
+
 $(document).on("click", ".pagination a", function(e) {
     if (
         $(this)

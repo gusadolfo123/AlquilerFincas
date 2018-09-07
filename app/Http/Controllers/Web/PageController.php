@@ -15,6 +15,7 @@ use App\Via;
 use App\Reserva;
 use App\Ciudad;
 use App\Quotation;
+use App\fotoFinca;
 use DB;
 
 
@@ -43,7 +44,9 @@ class PageController extends Controller
 
     public function events()
     {
-        return view("web.events");
+        $fotos = fotoFinca::paginate(10);
+        
+        return view("web.events", compact(['fotos']));
     }
 
     public function AplicarFiltros(Request $request)

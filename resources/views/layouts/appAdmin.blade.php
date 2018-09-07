@@ -12,6 +12,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/flexslider.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet">
     <link href="{{ asset('css/myStyles.css') }}" rel="stylesheet">
 
 </head>
@@ -43,14 +47,23 @@
                 @else    
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ url('/Admin/') }}">Inicio <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ route('Admin.index') }}">Inicio <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/Admin/Fincas') }}">Fincas</a>
+                        <a class="nav-link" href="{{ route('farms.index') }}">Fincas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/Admin/Vias') }}">Vias</a>
-                    </li>                    
+                        <a class="nav-link" href="{{ route('departments.index') }}">Departamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('tracks.index') }}">Vias</a>
+                    </li>   
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('seasons.index') }}">Temporadas</a>
+                    </li>                 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('customers.index') }}">Clientes</a>
+                    </li>                 
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
@@ -68,8 +81,12 @@
     </div>
 
     <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>       
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>     
+    <!-- FlexSlider -->
+    <script src="{{ asset('js/jquery.flexslider.js') }}"></script>  
+    <script src="{{ asset('js/lightbox.js') }}"></script>  
+    @yield('scripts')
 
 </body>
 </html>

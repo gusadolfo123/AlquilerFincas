@@ -18,9 +18,9 @@ Route::any('/fincas/{frag?}', array('as' => 'farms', 'uses' => 'Web\PageControll
 Route::get('filtrarFincas/', 'Web\PageController@AplicarFiltros');
 
 // Admin
-Route::resource('Admin/', 'Admin\AdminController');
-Route::resource('Admin/fincas', 'Admin\FarmController');
-Route::resource('Admin/temporadas', 'Admin\TempController');
-Route::resource('Admin/ciudades', 'Admin\CityController');
-
-
+Route::resource('Admin', 'Admin\AdminController');
+Route::resource('farms', 'Admin\FarmController');
+Route::resource('seasons', 'Admin\SeasonController');
+Route::resource('departments', 'Admin\DepartamentController');
+Route::resource('tracks', 'Admin\TrackController');
+Route::resource('customers', 'Admin\CustomerController');

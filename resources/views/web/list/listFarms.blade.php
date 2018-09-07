@@ -13,7 +13,7 @@
                         <img class="card-img" src="{{ $finca->fotos->first()->archivo }}" alt="Card image">
                         <div class="card-img-overlay p-0">
                             <h6 class="card-title">
-                                <small class="bg-success text-light rounded pl-1 pr-1">Via: Bogota - Medellin Km 40  </small>
+                                <small class="bg-success text-light rounded pl-1 pr-1">Via: {{ $finca->via->descripcion }} </small>
                             </h6>
                         </div>
                     </div>  
