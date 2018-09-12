@@ -817,8 +817,46 @@ a:hover,
 
 .activeClass {
     background: rgb(233, 152, 152);
+    color: rgb(253, 253, 253) !important;
+}
+
+.activeClass:hover {
+    background: rgb(233, 152, 152);
+    color: rgb(0, 0, 0) !important;
+}
+
+.activeClassMedia {
+    background: rgb(11, 163, 150);
+    color: rgb(253, 253, 253) !important;
+}
+
+.activeClassMedia:hover {
+    background: rgb(11, 163, 150);
+    color: rgba(0, 0, 0, 0.877) !important;
+}
+
+.selectActiveClass {
+    background: rgb(164, 159, 241);
 }
 
 .day disabled {
     background: rgb(97, 93, 93);
+}
+
+.letra {
+    font-size: 13px !important;
+}
+
+.letra-h8 {
+    font-size: 11px !important;
+}
+
+@media only screen and (max-width: 575px) {
+    .centrar_texto2 {
+        text-align: center !important;
+    }
+}
+
+.horse {
+    width: 19px !important;
 }

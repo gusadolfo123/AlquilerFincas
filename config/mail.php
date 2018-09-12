@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'gusadolfo123@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'gusadolfo123@gmail.com'),
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env('MAIL_USERNAME', 'gusadolfo123@gmail.com'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('MAIL_PASSWORD', 'polohades123456'),
 
     /*
     |--------------------------------------------------------------------------
@@ -113,10 +113,10 @@ return [
     */
 
     'markdown' => [
-        'theme' => 'default',
+        'theme' => 'templateMail',
 
         'paths' => [
-            resource_path('views/vendor/mail'),
+            resource_path('views/mails'),
         ],
     ],
 

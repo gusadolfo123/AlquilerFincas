@@ -14,14 +14,14 @@ class FincasTableSeeder extends Seeder
         
 
         //factory(App\Finca::class, 10)->create();
-        $fincas = factory(App\Finca::class, 10)->make();
+        $fincas = factory(App\Finca::class, 50)->make();
         
-        $ciudades = App\Ciudad::all();
+        $depatamentos = App\Departamento::all();
         $vias = App\Via::all();
 
         foreach($fincas as $finca)
         {
-            $ciudades->random()->fincas()->save($finca);
+            $depatamentos->random()->fincas()->save($finca);
             $vias->random()->fincas()->save($finca);
         }
     }

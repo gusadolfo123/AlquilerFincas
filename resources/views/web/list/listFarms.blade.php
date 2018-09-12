@@ -32,12 +32,17 @@
             </div>
         @endforeach
     </div>
-    
+
     <hr />
 
-    @if(isset($data))
-        {{ $fincas->appends(['p' => 'true'])->links() }}
-    @else
-        {{ $fincas->links() }}
-    @endif
+    <div class="row">
+        <div class="col-md-12 text-center">
+            @if(isset($data))
+                {{ $fincas->appends(['p' => 'true'])->links() }}
+            @else
+                {{ $fincas->links() }}
+            @endif
+        </div>
+    </div>
+    
 </div>  

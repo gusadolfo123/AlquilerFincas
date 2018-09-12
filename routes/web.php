@@ -11,8 +11,12 @@ Route::get('/contacto', 'Web\PageController@contact')->name('contact');
 Route::get('/finca/{slug}', 'Web\PageController@farm')->name('farm');
 Route::get('/eventos', 'Web\PageController@events')->name('events');
 
+// Email related routes
+Route::get('mail/send', 'MailController@send');
+
 //Posts
 Route::any('/fincas/{frag?}', array('as' => 'farms', 'uses' => 'Web\PageController@farms'));
+Route::any('/enviarCotizacion', array('as' => 'enviarCotizacion', 'uses' => 'Web\PageController@sendMessage'));
 
 //Filtro Fincas
 Route::get('filtrarFincas/', 'Web\PageController@AplicarFiltros');

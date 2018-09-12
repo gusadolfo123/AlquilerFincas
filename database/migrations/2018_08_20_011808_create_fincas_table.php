@@ -18,21 +18,25 @@ class CreateFincasTable extends Migration
             $table->string('nombre', 128);
             $table->text('descripcion');
             $table->decimal('precio_Tbaja');
+            $table->decimal('precio_Tmedia');
             $table->decimal('precio_Talta');
             $table->string('direccion', 128);
             $table->integer('cant_habitaciones');
-            $table->integer('cant_banios');
+            $table->integer('cant_banios');            
             $table->integer('max_personas');            
             $table->boolean('sn_jacuzi');
             $table->boolean('sn_piscina');
+            $table->boolean('sn_caballos');
+            $table->boolean('sn_parqueadero');
+            $table->boolean('sn_picnic');
             $table->string('slug', 128)->unique(); // url amigable
             
             $table->integer('via_id')->unsigned();
-            $table->integer('ciudad_id')->unsigned();
+            $table->integer('departamento_id')->unsigned();
 
             //relaciones
             $table->foreign('via_id')->references('id')->on('vias')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('ciudad_id')->references('id')->on('ciudads')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }

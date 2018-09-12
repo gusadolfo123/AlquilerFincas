@@ -3,13 +3,12 @@
 @section('content')
 
 <div class="row-fluid">
-    <!-- <div class="col-12 bg-primary py-3"> Fondo Azul -->
     <div class="col-12 bg-dark py-3 border border-right-0 border-left-0 border-top-0 border-success">        
         <form action="{{ url('/fincas') }}" method="POST" class="form-row align-items-end">    
             {{ csrf_field() }}
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 two-fields">
                 <div class="form-group text-center">     
-                    <label for="datePickerEntrada" class="text-white">Fechas</label> 
+                    <label class="text-white">Fechas</label> 
                     <div class="input-group">
                         @if(isset($data))
                         <input id="datePickerEntrada" name="fecEntrada"  class="form-control" placeholder="Entrada" readonly="readonly" value="{{ $data['fecEntrada'] }}" required>  
@@ -26,11 +25,9 @@
                     <label for="datePickerEntrada" class="text-white">Cantidad Huespedes</label> 
                     <div class="input-group">    
                         @if(isset($data))
-                        <input id="cantAdultos" name="cantAdultos"  class="form-control" type="number" placeholder="Adultos" value="{{ $data['cantAdultos'] }}" required>                
-                        <input id="cantNinos" name="cantNinos"  class="form-control"  type="number" placeholder="Niños" value="{{ $data['cantNinos'] }}" required>  
+                        <input id="cantHuespedes" name="cantHuespedes"  class="form-control" type="number" placeholder="Nro Huespedes" value="{{ $data['cantHuespedes'] }}" required>
                         @else
-                        <input id="cantAdultos" name="cantAdultos"  class="form-control" type="number" placeholder="Adultos" required>                
-                        <input id="cantNinos" name="cantNinos"  class="form-control"  type="number" placeholder="Niños" required>  
+                        <input id="cantHuespedes" name="cantHuespedes"  class="form-control" type="number" placeholder="Nro Huespedes" required>
                         @endif
                     </div>   
                 </div>
@@ -59,9 +56,8 @@
         <div class="row-fluid pt-3">
             <div class="alert alert-success alert-dismissible mb-0 fade show" role="alert">
                 <strong>Informacion de Busqueda:</strong> 
-                <p>En la parte superior puede encontrar el panel de busqueda por fechas,
-                tenga en cuenta que el precio puede variar segun el tipo de temporada identificadas en el calendario mediante los colores: 
-                (<span style="background-color: rgb(233, 152, 152);"> Alta </span>,<span style="background-color: #AFBAEE;"> Media </span>).</p>
+                <p>Tenga en cuenta que el precio puede variar segun el tipo de temporada identificadas en el calendario mediante los colores: 
+                (<span style="background-color: rgb(233, 152, 152); color: white;"> Alta </span>,<span style="background-color: rgb(11, 163, 150); color:white;"> Media </span>).</p>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -15,14 +15,14 @@ class Finca extends Model
     protected $fillable = [
         'nombre', 'descripcion', 'precio_Tbaja', 
         'precio_Talta', 'direccion', 'cant_habitaciones', 'cant_banios', 
-        'ciudad_id', 'via_id', 'sn_jacuzi', 'sn_piscina', 'slug'
+        'departamento_id', 'via_id', 'sn_jacuzi', 'sn_piscina', 'slug'
     ];
 
     /* Relacion  */
-    public function ciudad()
+    public function departamento()
     {
-        // una finca pertenece a una ciudad
-        return $this->belongsTo(Ciudad::class);
+        // una finca pertenece a una Departamento
+        return $this->belongsTo(Departamento::class);
     }
 
     public function via()
@@ -77,8 +77,8 @@ class Finca extends Model
         if($filtros == null)
         {
             $sql = "SELECT  f.*
-                FROM    fincas f JOIN ciudads c
-                            ON  f.ciudad_id = c.id AND
+                FROM    fincas f JOIN departamentos c
+                            ON  f.departamento_id = c.id AND
                                 c.descripcion =?  AND
                                 f.max_personas >= ? + ?
                         JOIN reservas r
@@ -88,8 +88,8 @@ class Finca extends Model
                             ON	f.via_id = v.id
                 UNION
                 SELECT  f.*
-                FROM    fincas f JOIN ciudads c
-                            ON  f.ciudad_id = c.id AND
+                FROM    fincas f JOIN departamentos c
+                            ON  f.departamento_id = c.id AND
                                 c.descripcion =? AND
                                 f.max_personas >= ? + ?
                         JOIN reservas r
@@ -100,8 +100,8 @@ class Finca extends Model
                             ON	f.via_id = v.id
                 UNION
                 SELECT  f.*
-                FROM    fincas f JOIN ciudads c
-                            ON  f.ciudad_id = c.id AND
+                FROM    fincas f JOIN departamentos c
+                            ON  f.departamento_id = c.id AND
                                 c.descripcion =? AND
                                 f.id NOT IN (SELECT finca_id FROM reservas) AND
                                 f.max_personas >= ? + ?
@@ -115,8 +115,8 @@ class Finca extends Model
             if ($filtros['via'] == "undefined") $filtros['via'] = null;
 
             $sql = "SELECT  f.*
-                    FROM    fincas f JOIN ciudads c
-                                ON  f.ciudad_id = c.id AND
+                    FROM    fincas f JOIN departamentos c
+                                ON  f.departamento_id = c.id AND
                                     c.descripcion =?  AND
                                     f.max_personas >= ? + ? AND
                                     f.cant_banios >= IFNULL(?, f.cant_banios) AND
@@ -131,8 +131,8 @@ class Finca extends Model
                                     v.id = IFNULL(?, v.id)
                     UNION
                     SELECT  f.*
-                    FROM    fincas f JOIN ciudads c
-                                ON  f.ciudad_id = c.id AND
+                    FROM    fincas f JOIN departamentos c
+                                ON  f.departamento_id = c.id AND
                                     c.descripcion =? AND
                                     f.max_personas >= ? + ? AND
                                     f.cant_banios >= IFNULL(?, f.cant_banios) AND
@@ -148,8 +148,8 @@ class Finca extends Model
                                     v.id = IFNULL(?, v.id)
                     UNION
                     SELECT  f.*
-                    FROM    fincas f JOIN ciudads c
-                                ON  f.ciudad_id = c.id AND
+                    FROM    fincas f JOIN departamentos c
+                                ON  f.departamento_id = c.id AND
                                     c.descripcion =? AND
                                     f.id NOT IN (SELECT finca_id FROM reservas) AND
                                     f.max_personas >= ? + ? AND

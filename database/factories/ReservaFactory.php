@@ -13,7 +13,7 @@ $factory->define(App\Reserva::class, function (Faker $faker) {
         'fec_Reserva' => date('Y-m-d H:i:s'),
         'fec_Ingreso' => $startingDate,
         'fec_Salida' => $endingDate,
-        'preCotizacion' => rand(50000, 50000),
+        'preCotizacion' => rand(50000, 180000),
         'requerimientos' => $faker->text(500),
         'cant_Menores' => rand(1,10),
         'cant_Adultos' => rand(1,10),

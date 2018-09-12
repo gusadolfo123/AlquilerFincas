@@ -12,7 +12,7 @@ class FotosFincaTableSeeder extends Seeder
     public function run()
     {
         //factory(App\fotoFinca::class, 30)->create();
-        $fotos = factory(App\fotoFinca::class, 30)->make();
+        $fotos = factory(App\fotoFinca::class, 300)->make();
         
         $fincas = App\Finca::all();
         foreach($fotos as $foto)

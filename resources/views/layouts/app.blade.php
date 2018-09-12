@@ -22,13 +22,14 @@
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/flexslider.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap-datepicker3.css') }}" rel="stylesheet" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
         <link href="{{ asset('css/myStyles.css') }}" rel="stylesheet">
         
         
 
     </head>
     <!-- <body class="myBody my-4 example"> -->
-    <body>
+    <body class=" bg-primary">
 
         <div id="app" class="container">
         
@@ -119,18 +120,22 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
+        <script src="{{ asset( 'js/jquery-ui.js') }}"></script>
         <script src="{{ asset('js/validator.min.js') }}"></script>
         <!-- FlexSlider -->
         <script src="{{ asset('js/jquery.flexslider.js') }}"></script>
         <!-- DatePicker -->
         <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('js/bootstrap-datepicker.es.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
         <script src="{{ asset('js/myScripts.js') }}"></script>
 
         <script>
-         
+
+
+            
+
             $(function() {                                     
-                
 
                 $('#formSearch').on('submit', function(e){
                     
@@ -149,7 +154,7 @@
                 
                 var dateNow = new Date();
                 var now = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate(), 0, 0, 0, 0);
-                // var active_dates = ["30/8/2018","31/8/2018", "20/9/2018"];
+                
                 var active_dates = [
                         @if(isset($fechas))
                             @foreach ($fechas as $fe)
@@ -157,6 +162,31 @@
                             @endforeach
                         @endif
                     ];
+                
+                var tempAlta = [
+                        @if(isset($fechas))
+                            @foreach ($fechas as $fe)
+                                "{{ date_format(date_create($fe->fecha), 'd/m/Y') }}", 
+                            @endforeach
+                        @endif
+                    ];
+            
+                var fecReservadas = [
+                            @if(isset($reservasConfirmadas))
+                                @foreach ($reservasConfirmadas as $reserva)
+                                    "{{ date_format(date_create($reserva->fec_Ingreso), 'd/m/Y') }}", 
+                                @endforeach
+                            @endif
+                        ];
+
+                var tempMedia = [
+                            @if(isset($fecMedia))
+                                @foreach ($fecMedia as $fecM)
+                                    "{{ date_format(date_create($fecM->fecha), 'd/m/Y') }}", 
+                                @endforeach
+                            @endif
+                        ];
+               
 
                 var checkin = $('#datePickerEntrada').datepicker({
                     language: "es",
@@ -171,11 +201,29 @@
                             var curr_date = d.getDate();
                             var curr_month = d.getMonth() + 1; //Months are zero based
                             var curr_year = d.getFullYear();
-                            var formattedDate = curr_date + "/" + curr_month + "/" + curr_year
+                            var formattedDate = (curr_date.toString().length == 1 ? "0" + curr_date : curr_date) + "/" + 
+                                            (curr_month.toString().length == 1 ? "0" + curr_month : curr_month) + "/" + curr_year
+                        
 
                             if ($.inArray(formattedDate, active_dates) != -1){
                                 return {
                                     classes: 'activeClass',
+                                };
+                            }
+
+                            if ($.inArray(formattedDate, fecReservadas) != -1){
+                                return 'disabled';
+                            }
+
+                            if ($.inArray(formattedDate, tempAlta) != -1){
+                                return {
+                                    classes: 'activeClass',
+                                };
+                            }
+
+                            if ($.inArray(formattedDate, tempMedia) != -1){
+                                return {
+                                    classes: 'activeClassMedia',
                                 };
                             }
                             return;
@@ -208,13 +256,32 @@
                                 var curr_date = d.getDate();
                                 var curr_month = d.getMonth() + 1; //Months are zero based
                                 var curr_year = d.getFullYear();
-                                var formattedDate = curr_date + "/" + curr_month + "/" + curr_year
-
+                                var formattedDate = (curr_date.toString().length == 1 ? "0" + curr_date : curr_date) + "/" + 
+                                            (curr_month.toString().length == 1 ? "0" + curr_month : curr_month) + "/" + curr_year
+                                
                                 if ($.inArray(formattedDate, active_dates) != -1){
                                     return {
                                         classes: 'activeClass',
                                     };
                                 }
+
+
+                                if ($.inArray(formattedDate, fecReservadas) != -1){
+                                    return 'disabled';
+                                }
+
+                                if ($.inArray(formattedDate, tempAlta) != -1){
+                                    return {
+                                        classes: 'activeClass',
+                                    };
+                                }
+
+                                if ($.inArray(formattedDate, tempMedia) != -1){
+                                    return {
+                                        classes: 'activeClassMedia',
+                                    };
+                                }
+
                                 return;
                             }else{
                                 return date >= new Date();

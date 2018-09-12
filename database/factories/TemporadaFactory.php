@@ -12,7 +12,8 @@ $factory->define(App\Temporada::class, function (Faker $faker) {
     $date = Carbon::create($year,$month ,$day , 0, 0, 0);
     
     return [
-        'descripcion' => $faker->text(20),
+        'descripcion' => $faker->text(10),
+        'estado' => $faker->randomElement(['ALTA', 'MEDIA']),        
         'fecha' => $date
     ];
 });

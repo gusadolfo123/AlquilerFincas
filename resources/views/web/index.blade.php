@@ -20,15 +20,14 @@
                 <div class="form-group text-center">     
                     <label class="text-white">Cantidad Huespedes</label> 
                     <div class="input-group">    
-                        <input id="cantAdultos" name="cantAdultos"  class="form-control" type="number" placeholder="Adultos" required>                
-                        <input id="cantNinos" name="cantNinos"  class="form-control"  type="number" placeholder="Niños" required>   
+                        <input id="cantHuespedes" name="cantHuespedes"  class="form-control" type="number" placeholder="Nro Huespedes" required>
                     </div>   
                 </div>
             </div> 
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="form-group text-center">     
                     <label for="txtDepartamento" class="text-white">Departamento</label> 
-                    <input id="txtDepartamento" name="departamento" class="form-control" type="text" placeholder="Departamento" required>                
+                    <input id="txtDepartamento" name="departamento" class="form-control" type="text" placeholder="Departamento" required>
                 </div>
             </div>      
             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pb-3">
