@@ -188,7 +188,9 @@
                         <ul class="slides">
                             @foreach($finca->fotos as $foto)
                                 <li>
-                                    <img src="{{ $foto->archivo }}" />
+                                    <a href="{{ $foto->archivo }}" data-lightbox="example-set">
+                                        <img src="{{ $foto->archivo }}" />
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>
@@ -196,8 +198,8 @@
                     <div id="carousel" class="flexslider fondo_transparente d-none d-sm-block mb-0">
                         <ul class="slides">
                             @foreach($finca->fotos as $foto)
-                                <li>
-                                    <img src="{{ $foto->archivo }}" />
+                                <li>                                    
+                                    <img src="{{ $foto->archivo }}" />                                    
                                 </li>
                             @endforeach
                         </ul>
@@ -286,6 +288,8 @@
             </div>
             <form class="modal-body pt-2" action="{{ url('enviarCotizacion') }}" id="enviarCotizacion" method="POST">
                 {{ csrf_field() }}
+                <input type="hidden" name="nomFinca" value="{{ $finca->nombre }}">
+                <input type="hidden" name="tcotizacion" id="tcotizacion" >
                 <div class="row">
                     <div class="col-6 two-fields">
                         <div class="form-group text-center">     
@@ -306,9 +310,9 @@
                             <label class="text-dark"><strong>Huespedes</strong></label> 
                             <div class="input-group">                                
                                 @if(isset($data))
-                                <input id="cantHuespedes" name="cantHuespedes"  class="form-control" type="number" placeholder="Nro Huespedes" value="{{ $data['cantHuespedes'] }}" required>
+                                <input id="cantHuespedesModal" name="cantHuespedesModal"  class="form-control" type="number" placeholder="Nro Huespedes" value="{{ $data['cantHuespedes'] }}" required>
                                 @else
-                                <input id="cantHuespedes" name="cantHuespedes"  class="form-control" type="number" placeholder="Nro Huespedes" required>
+                                <input id="cantHuespedesModal" name="cantHuespedesModal"  class="form-control" type="number" placeholder="Nro Huespedes" required>
                                 @endif                     
                             </div>      
                         </div>
@@ -415,22 +419,84 @@
             
             $("#enviarCotizacion").on("submit", function(e) {
                 
-                $.ajaxSetup({
-                    header: $('meta[name="_token"]').attr("content")
-                });
+                
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                let nomFinca = "{{ $finca->nombre }}";
+                let fincaId = "{{ $finca->id }}";
+
+                let valNocheTempAlta = $('#fecTempAlta .precioNoche').html();
+                let valNocheTempMedia = $('#fecTempMedia .precioNoche').html();               
+                let valNocheTempNormal = $('#fecTempNormal .precioNoche').html();
+
+                let nroNochesN = $('#nroNochesN').html();
+                let nroNochesM = $('#nroNochesM').html();
+                let nroNochesA = $('#nroNochesA').html();
+
+                let totalNochesTempNormal = $('#totalNochesTempNormal').html();
+                let totalNochesTempMedia = $('#totalNochesTempMedia').html();
+                let totalNochesTempAlta = $('#totalNochesTempAlta').html();
+
+                let totalCotizacion = $('#totalCotizacion').html();
+                let tCotizacion = $('#tcotizacion').val();
+
+                let nomCompleto = $('#nombreC').val();
+                let correo = $('#correo').val();
+                let tel1 = $('#tel1').val();
+                let tel2 = $('#tel2').val();
+                let comentarios = $('#comentarios').val();
+
+                let fecDesde = $('#dpEntrada').val();
+                let fecHasta = $('#dpSalida').val();
+
+                let cantHuespedes = $('#cantHuespedesModal').val();
+
+                let data = {
+                            '_token ': CSRF_TOKEN,
+                            'fincaId': fincaId,
+                            'nomFinca': nomFinca,
+                            'tCotizacion': tCotizacion,
+                            'valNocheTempAlta': valNocheTempAlta,
+                            'valNocheTempMedia': valNocheTempMedia,
+                            'valNocheTempNormal': valNocheTempNormal,
+                            'nroNochesN': nroNochesN,
+                            'nroNochesM': nroNochesM,
+                            'nroNochesA': nroNochesA,
+                            'totalNochesTempNormal': totalNochesTempNormal,
+                            'totalNochesTempMedia': totalNochesTempMedia,
+                            'totalNochesTempAlta': totalNochesTempAlta,
+                            'totalCotizacion': totalCotizacion,
+                            'nomCompleto': nomCompleto,
+                            'correo': correo,
+                            'telefono1': tel1,
+                            'telefono2': tel2,
+                            'comentarios': comentarios,
+                            'fecDesde': fecDesde,
+                            'fecHasta': fecHasta,
+                            'cantHuespedes': cantHuespedes
+                        };
+                
+                //console.log(data);
 
                 e.preventDefault(e);
-                
+                           
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: "{{ route('enviarCotizacion') }}",
-                    data: $(this).serialize(),
+                    //data: $(this).serialize(),
+                    data: data,
                     dataType: "json",
                     success: function(data) {
                         $("#exampleModalCenter .close").click();
                         swal({  position: 'top-end',
                                 type: 'success',
-                                title: 'Se envio el correo de reserva Exitosamente, En Breve nos estaremos comunicando con usted.'});
+                                title: 'Se envio el correo de reserva Exitosamente, En Breve nos estaremos comunicando con usted.Se han Enviado detalles a su Buzon'});
                     },
                     error: function(data) {                        
                         swal({  type: 'error',
@@ -651,6 +717,7 @@
                         $('#btnConfirmar').removeClass('d-none');
                         $('#tituloTotal').removeClass('d-none');
                         $('#totalCotizacion').html(valTotal.toLocaleString());
+                        $('#tCotizacion').val(valTotal);
                         
                         
                     }else{
@@ -729,7 +796,7 @@
                         $('#btnConfirmar').removeClass('d-none');
                         $('#tituloTotal').removeClass('d-none');
                         $('#totalCotizacion').html(valTotal.toLocaleString());
-                        
+                        $('#tcotizacion').val(valTotal);                        
                      
                     }                      
                 }

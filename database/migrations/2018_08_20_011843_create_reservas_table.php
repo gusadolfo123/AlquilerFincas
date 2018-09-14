@@ -20,10 +20,9 @@ class CreateReservasTable extends Migration
             $table->datetime('fec_Reserva');
             $table->datetime('fec_Ingreso');
             $table->datetime('fec_Salida');
-            $table->decimal('preCotizacion');
+            $table->float('preCotizacion', 18,2);
             $table->text('requerimientos');
-            $table->integer('cant_Menores');
-            $table->integer('cant_Adultos');
+            $table->integer('cant_huespedes');            
 
             $table->enum('estado', ['VERIFICACION', 'CONFIRMADO'])->default('VERIFICACION');
 

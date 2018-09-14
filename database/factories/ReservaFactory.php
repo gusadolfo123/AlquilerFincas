@@ -15,8 +15,7 @@ $factory->define(App\Reserva::class, function (Faker $faker) {
         'fec_Salida' => $endingDate,
         'preCotizacion' => rand(50000, 180000),
         'requerimientos' => $faker->text(500),
-        'cant_Menores' => rand(1,10),
-        'cant_Adultos' => rand(1,10),
+        'cant_huespedes' => rand(1,10),
         'estado' => $faker->randomElement(['VERIFICACION', 'CONFIRMADO'])
     ];
 });

@@ -23,6 +23,7 @@
         <link href="{{ asset('css/flexslider.css') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap-datepicker3.css') }}" rel="stylesheet" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+        <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet">
         <link href="{{ asset('css/myStyles.css') }}" rel="stylesheet">
         
         
@@ -128,6 +129,7 @@
         <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('js/bootstrap-datepicker.es.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+        <script src="{{ asset('js/lightbox.js') }}"></script>  
         <script src="{{ asset('js/myScripts.js') }}"></script>
 
         <script>
@@ -293,13 +295,32 @@
                                 var curr_date = d.getDate();
                                 var curr_month = d.getMonth() + 1; //Months are zero based
                                 var curr_year = d.getFullYear();
-                                var formattedDate = curr_date + "/" + curr_month + "/" + curr_year
-
+                                var formattedDate = (curr_date.toString().length == 1 ? "0" + curr_date : curr_date) + "/" + 
+                                            (curr_month.toString().length == 1 ? "0" + curr_month : curr_month) + "/" + curr_year
+                                
                                 if ($.inArray(formattedDate, active_dates) != -1){
                                     return {
                                         classes: 'activeClass',
                                     };
                                 }
+
+
+                                if ($.inArray(formattedDate, fecReservadas) != -1){
+                                    return 'disabled';
+                                }
+
+                                if ($.inArray(formattedDate, tempAlta) != -1){
+                                    return {
+                                        classes: 'activeClass',
+                                    };
+                                }
+
+                                if ($.inArray(formattedDate, tempMedia) != -1){
+                                    return {
+                                        classes: 'activeClassMedia',
+                                    };
+                                }
+
                                 return;
                             }else{
                                 return date > checkin.datepicker("getDate");

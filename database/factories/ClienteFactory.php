@@ -6,6 +6,7 @@ $factory->define(App\Cliente::class, function (Faker $faker) {
     return [
         'nombre' => $faker->unique()->name(60),
         'email' => $faker->unique()->email(),
-        'celular' => $faker->unique()->phoneNumber()
+        'telefono1' => $faker->unique()->phoneNumber(),
+        'telefono2' => $faker->unique()->phoneNumber()
     ];
 });

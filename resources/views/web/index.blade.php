@@ -3,6 +3,17 @@
 @section('content')
 
 <div class="row-fluid">
+    <div class="alert alert-success alert-dismissible mb-0 fade show" role="alert">
+        <strong>Informacion de Busqueda:</strong> 
+        <p>Tenga en cuenta que el precio puede variar segun el tipo de temporada identificadas en el calendario mediante los colores: 
+        (<span style="background-color: rgb(233, 152, 152); color: white;"> Alta </span>,<span style="background-color: rgb(11, 163, 150); color:white;"> Media </span>).</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div> 
+
+<div class="row-fluid">
     <!-- <div class="col-12 bg-primary py-3"> Fondo Azul -->
     <div class="col-12 bg-dark py-3 border border-right-0 border-left-0 border-top-0 border-success">        
         <form name="formSearch" id="formSearch" action="{{ url('/fincas') }}" method="POST" class="form-row align-items-end">    

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SendEmail;
+use App\Mail\ConfirmacionPreReserva;
 use App\Finca;
 use App\Temporada;
 use App\Via;
@@ -20,7 +21,9 @@ use App\Reserva;
 use App\Departamento;
 use App\Quotation;
 use App\fotoFinca;
+use App\Cliente;
 use Carbon\Carbon;
+use DateTime;
 
 class PageController extends Controller
 {  
@@ -259,14 +262,54 @@ class PageController extends Controller
     public function sendMessage(Request $request)
     {
         $data = $request->all();
+        $fecha = Carbon::now();
 
-        $objDemo = new \stdClass();
-        $objDemo->NombleCompleto = $data['nombreC'];
-        $objDemo->to = $data['correo'];
-        $objDemo->sender = 'AlquilerFincas';
-        $objDemo->receiver = $data['nombreC'];
- 
-        Mail::to($data['correo'])->send(new SendEmail($objDemo));
+        $cliente = [
+            'nombre' => $data['nomCompleto'],
+            'email' => $data['correo'],
+            'telefono1' => $data['telefono1'],
+            'telefono2' => $data['telefono2']
+        ];
+
+        $clienteC = Cliente::firstOrCreate($cliente);
+        
+        $reserva = [
+            'finca_id' => $data['fincaId'],
+            'cliente_id' => $clienteC->id,
+            'fec_Reserva' => $fecha,
+            'fec_Ingreso' => Carbon::createFromFormat('d/m/Y', $data['fecDesde']),
+            'fec_Salida' => Carbon::createFromFormat('d/m/Y', $data['fecHasta']),
+            'preCotizacion' => $data['tCotizacion'],
+            'requerimientos' => $data['comentarios'],
+            'cant_huespedes' => $data['cantHuespedes'],
+            'estado' => 'VERIFICACION'
+        ];
+        
+        $reservaC = Reserva::firstOrCreate($reserva);
+
+        $objDemo = new \stdClass();        
+        $objDemo->nomFinca = $data['nomFinca'];
+        $objDemo->valNocheTempAlta = $data['valNocheTempAlta'];
+        $objDemo->valNocheTempMedia = $data['valNocheTempMedia'];
+        $objDemo->valNocheTempNormal = $data['valNocheTempNormal'];
+        $objDemo->nroNochesN = $data['nroNochesN'];
+        $objDemo->nroNochesM = $data['nroNochesM'];
+        $objDemo->nroNochesA = $data['nroNochesA'];
+        $objDemo->totalNochesTempNormal = $data['totalNochesTempNormal'];
+        $objDemo->totalNochesTempMedia = $data['totalNochesTempMedia'];
+        $objDemo->totalNochesTempAlta = $data['totalNochesTempAlta'];
+        $objDemo->totalCotizacion = $data['totalCotizacion'];
+        $objDemo->nomCompleto = $data['nomCompleto'];
+        $objDemo->correo = $data['correo'];
+        $objDemo->telefono1 = $data['telefono1'];
+        $objDemo->telefono2 = $data['telefono2'];
+        $objDemo->comentarios = $data['comentarios'];
+        $objDemo->fecDesde = $data['fecDesde'];
+        $objDemo->fecHasta = $data['fecHasta'];
+        $objDemo->nroReserva = $reservaC->id;
+        $objDemo->sender = 'AlquilamosFincas.com';
+                
+        Mail::to($data['correo'])->send(new ConfirmacionPreReserva($objDemo));
 
         return response()->json(['responseText' => 'Success!'], 200);
     }

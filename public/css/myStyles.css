@@ -851,6 +851,10 @@ a:hover,
     font-size: 11px !important;
 }
 
+.letra-h7 {
+    font-size: 10px !important;
+}
+
 @media only screen and (max-width: 575px) {
     .centrar_texto2 {
         text-align: center !important;
@@ -859,4 +863,9 @@ a:hover,
 
 .horse {
     width: 19px !important;
+}
+
+.btn-list {
+    font-size: 10px !important;
+    padding: 6px 10px !important;
 }

@@ -77,6 +77,37 @@
             </div>
         </nav>
 
+        @if(session('info'))
+            <div class="container mt-3">
+                <div class="row-fluid">
+                    <div class="alert alert-success alert-dismissible mb-0 fade show" role="alert">
+                        {{ session('info') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div> 
+            </div>
+        @endif
+        
+        
+        @if(count($errors))
+            <div class="container mt-3">
+                <div class="row-fluid">
+                    <div class="alert alert-danger alert-dismissible mb-0 fade show" role="alert">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div> 
+            </div>
+        @endif
+
         @yield('content')
     </div>
 
@@ -86,6 +117,10 @@
     <!-- FlexSlider -->
     <script src="{{ asset('js/jquery.flexslider.js') }}"></script>  
     <script src="{{ asset('js/lightbox.js') }}"></script>  
+    <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
+  
+    
+    
     @yield('scripts')
 
 </body>

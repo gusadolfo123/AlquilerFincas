@@ -16,7 +16,8 @@ Route::get('mail/send', 'MailController@send');
 
 //Posts
 Route::any('/fincas/{frag?}', array('as' => 'farms', 'uses' => 'Web\PageController@farms'));
-Route::any('/enviarCotizacion', array('as' => 'enviarCotizacion', 'uses' => 'Web\PageController@sendMessage'));
+Route::post('/enviarCotizacion', array('as' => 'enviarCotizacion', 'uses' => 'Web\PageController@sendMessage'));
+
 
 //Filtro Fincas
 Route::get('filtrarFincas/', 'Web\PageController@AplicarFiltros');

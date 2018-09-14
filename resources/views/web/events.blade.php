@@ -14,7 +14,7 @@
                                 Contamoscon un portafolio diseñado para toda clase de eventos(Cumpleaños, despedidas de empresas, matrimonios etc.) 
                                 Solo comunícate con nosotros o envía tu solicitud, y en la brevedad uno de nuestros asesores le indicara toda la información.
                                 <hr />
-                                <strong class="h5">CONTACTENOS</strong>
+                                <strong class="h5"><a href="{{ url('/contacto') }}">CONTACTENOS</a></strong>
                             </p>
                         </div>
                     </div>
@@ -27,7 +27,9 @@
                                 @foreach($fotos as $foto)
                                         @if($foto->archivo != null)
                                         <li>
-                                            <img src="{{ $foto->archivo }}" style="height: 290px !important;" />
+                                            <a href="{{ $foto->archivo }}" data-lightbox="example-set">
+                                                <img src="{{ $foto->archivo }}"  style="height: 290px !important;" />
+                                            </a>
                                         </li>
                                         @endif
                                 @endforeach

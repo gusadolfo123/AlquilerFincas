@@ -1,14 +1,18 @@
 @extends('layouts.appAdmin')
+
 @section('content')
 
-<h1 class=" page-header text-center">Prueba Farm Index</h1>
+<h1 class=" page-header text-center mt-3">Formulario de Creacion</h1>
 
-<div class="container">
-    <div class="row">
-        @include('admin.farm.partial.form')
-    </div>
+<div class="container">        
+        <div class="row pb-4 justify-content-center">
+                {!! Form::open(['route' => 'farms.store']) !!}
+
+                        @include('admin.farm.partial.form')
+
+                {!! Form::close() !!}
+        </div>
 </div>
-
 
 @endsection
 
