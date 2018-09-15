@@ -35,7 +35,7 @@ class FarmUpdateRequest extends FormRequest
             'cant_banios' => 'required', 
             'departamento_id' => 'required', 
             'via_id' => 'required',            
-            'slug' => 'required|unique:fincas,slug,' . $this->farm,
+            'slug' => 'required|unique:fincas,slug,' . $this->id,
         ];
     }
 }

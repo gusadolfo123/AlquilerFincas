@@ -9,6 +9,8 @@ use App\Http\Requests\FarmUpdateRequest;
 use App\Finca;
 use App\Via;
 use App\Departamento;
+use Illuminate\Support\Facades\Storage;
+use App\fotoFinca;
 
 
 class FarmController extends Controller
@@ -86,13 +88,9 @@ class FarmController extends Controller
             $request['sn_parqueadero'] = 1;
         else 
             $request['sn_parqueadero'] = 0;
-
-        //dd($request->all());
-        $finca = Finca::create($request->all());
-
-        $vias = Via::all();
-        $departamentos = Departamento::all();
-
+              
+        $finca = Finca::create($request->all()); 
+        
         return redirect()->route('farms.edit', $finca->id)->with('info', 'Finca Creada Correctamente');        
     }
 
@@ -162,7 +160,7 @@ class FarmController extends Controller
 
         $finca = Finca::find($id);
         $finca->fill($request->all())->save();
-
+        
         return redirect()->route('farms.edit', $finca->id)->with('info', 'Finca Modificada Correctamente');
     }
 
@@ -178,5 +176,46 @@ class FarmController extends Controller
         
         return back()->with('info', 'Registro Eliminado Correctamente');
 
+    }
+    
+
+    public function uploadImage($id)
+    {
+        return view('admin.farm.uploadImage', compact('id'));
+    }
+
+    public function upload(Request $request)
+    {
+
+        $files = $request->file('file');
+
+        if($files)
+        {
+            foreach($files as $file)
+            {
+                //IMAGE 
+                $path = Storage::disk('public')->put('uploads/images',  $file);
+                
+                $photo = [
+                    'archivo' => asset($path),
+                    'name' => $path,
+                    'finca_id' => $request->id
+                ];
+
+                $photoC = fotoFinca::create($photo);
+
+            }
+        }
+
+    }
+
+    public function deleteImage(Request $request)
+    {
+        
+        $foto = fotoFinca::find($request->id);
+        unlink(public_path().'/'.$foto->name);
+        $del = fotoFinca::find($request->id)->delete();
+
+        return response()->json(['response' => 'success'], 200);
     }
 }

@@ -22,6 +22,10 @@ Route::post('/enviarCotizacion', array('as' => 'enviarCotizacion', 'uses' => 'We
 //Filtro Fincas
 Route::get('filtrarFincas/', 'Web\PageController@AplicarFiltros');
 
+Route::get('farms/uploadImage/{id}', 'Admin\FarmController@uploadImage');
+Route::post('farms/upload', array('as' => 'farms.upload', 'uses' => 'Admin\FarmController@upload'));
+Route::post('farms/deleteImage', array('as' => 'farms.deleteImage', 'uses' => 'Admin\FarmController@deleteImage'));
+
 // Admin
 Route::resource('Admin', 'Admin\AdminController');
 Route::resource('farms', 'Admin\FarmController');

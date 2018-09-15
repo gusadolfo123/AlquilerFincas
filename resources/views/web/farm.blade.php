@@ -197,15 +197,15 @@
                     </div>
                     <div id="carousel" class="flexslider fondo_transparente d-none d-sm-block mb-0">
                         <ul class="slides">
-                            @foreach($finca->fotos as $foto)
+                            @foreach($finca->fotos as $foto)                            
                                 <li>                                    
-                                    <img src="{{ $foto->archivo }}" />                                    
+                                    <img src="{{ $foto->archivo }}" style="width: 210px; height: 120px" />                                    
                                 </li>
                             @endforeach
                         </ul>
                     </div>
                 </section>
-                
+           
                 <div class="row mt-2">
                     <div class="col-md-12">
                         <div class="card bg-light mb-3">

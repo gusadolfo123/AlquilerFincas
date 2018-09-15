@@ -251,11 +251,12 @@ class PageController extends Controller
         $fecMedia = Temporada::where('estado', 'MEDIA')->get();
         $finca = Finca::where('slug', $slug)->first();    
         $fecha = Carbon::now();
-        
+        $path = base_path().'/uploads/images/';
+
         $reservasConfirmadas = Reserva::where([['finca_id', $finca->id], ['fec_ingreso', '>=' , $fecha ], ['estado', 'CONFIRMADO']])->get();
         $reservasVerificacion = Reserva::where([['finca_id', $finca->id], ['fec_ingreso', '>=' , $fecha ], ['estado', 'VERIFICACION']])->get();
 
-        return view('web.farm', compact(['finca', 'fechas', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia']));
+        return view('web.farm', compact(['finca', 'fechas', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia', 'path']));
     }
 
 
