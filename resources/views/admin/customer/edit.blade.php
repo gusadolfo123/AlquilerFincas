@@ -6,8 +6,8 @@
 
 <div class="container">        
     <div class="row pb-4 justify-content-center">                              
-        {!! Form::model($reserva, ['route' => ['reservations.update', $reserva->id], 'method' => 'PUT']) !!}
-            @include('admin.reservation.partial.form')
+        {!! Form::model($cliente, ['route' => ['customers.update', $cliente->id], 'method' => 'PUT', 'class' => 'col-sm-12']) !!}
+            @include('admin.customer.partial.form')
         {!! Form::close() !!}                
     </div>        
 </div>

@@ -102,9 +102,7 @@ class FarmController extends Controller
      */
     public function show($id)
     {
-        //
         $finca = Finca::find($id);
-
         return view('admin.farm.show', compact('finca'));
     }
 

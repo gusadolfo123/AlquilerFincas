@@ -6,8 +6,8 @@
 
 <div class="container">        
   <div class="row pb-4 justify-content-center">
-    {!! Form::open(['route' => 'reservations.store']) !!}
-      @include('admin.reservarion.partial.form')
+    {!! Form::open(['route' => 'departments.store']) !!}
+      @include('admin.department.partial.form')
     {!! Form::close() !!}
   </div>
 </div>

@@ -8,4 +8,7 @@ class Temporada extends Model
 {
     //
     public $timestamps = false;
+    protected $fillable = [
+            'descripcion', 'estado', 'fecha'
+        ];
 }

@@ -26,11 +26,15 @@ Route::get('farms/uploadImage/{id}', 'Admin\FarmController@uploadImage');
 Route::post('farms/upload', array('as' => 'farms.upload', 'uses' => 'Admin\FarmController@upload'));
 Route::post('farms/deleteImage', array('as' => 'farms.deleteImage', 'uses' => 'Admin\FarmController@deleteImage'));
 
+
+Route::any('seasons/high', array('as' => 'seasons.high', 'uses' => 'Admin\SeasonController@indexAlta'));
+Route::any('seasons/half', array('as' => 'seasons.half', 'uses' => 'Admin\SeasonController@indexMedia'));
+
 // Admin
 Route::resource('Admin', 'Admin\AdminController');
 Route::resource('farms', 'Admin\FarmController');
 Route::resource('seasons', 'Admin\SeasonController');
-Route::resource('departments', 'Admin\DepartamentController');
+Route::resource('departments', 'Admin\DepartmentController');
 Route::resource('tracks', 'Admin\TrackController');
 Route::resource('customers', 'Admin\CustomerController');
 Route::resource('reservations', 'Admin\ReservationController');

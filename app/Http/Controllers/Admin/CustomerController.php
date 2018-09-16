@@ -4,9 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Cliente;
 
 class CustomerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $cantReg = Cliente::all()->count(); 
+        $clientes = Cliente::orderBy('id')->paginate(10);
+                
+        return view('admin.customer.index', compact('clientes', 'cantReg'));
     }
 
     /**
@@ -24,7 +34,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.customer.create');
     }
 
     /**
@@ -35,7 +45,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = Cliente::create($request->all());         
+        return redirect()->route('customers.index')->with('info', 'Cliente Creado Correctamente');  
     }
 
     /**
@@ -46,7 +57,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = Cliente::find($id);
+        return view('admin.customer.show', compact('cliente'));
     }
 
     /**
@@ -57,7 +69,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cliente = Cliente::find($id);       
+        return view('admin.customer.edit', compact('cliente'));
     }
 
     /**
@@ -69,7 +82,10 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cliente = Cliente::find($id);
+        $cliente->fill($request->all())->save();
+        
+        return redirect()->route('customers.index')->with('info', 'Cliente Modificado Correctamente');
     }
 
     /**
@@ -80,6 +96,7 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cliente = Cliente::find($id)->delete();        
+        return back()->with('info', 'Registro Eliminado Correctamente');
     }
 }

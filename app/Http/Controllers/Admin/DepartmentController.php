@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Departamento;
 
-class DepartamentController extends Controller
+class DepartmentController extends Controller
 {
+   public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,10 @@ class DepartamentController extends Controller
      */
     public function index()
     {
-        //
+        $cantReg = Departamento::all()->count(); 
+        $departamentos = Departamento::orderBy('id')->paginate(10);
+                
+        return view('admin.department.index', compact('departamentos', 'cantReg'));
     }
 
     /**
@@ -23,8 +31,8 @@ class DepartamentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {          
+        return view('admin.department.create');
     }
 
     /**
@@ -35,7 +43,8 @@ class DepartamentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $departamento = Departamento::create($request->all());         
+        return redirect()->route('departments.index')->with('info', 'Departamento Creado Correctamente');     
     }
 
     /**
@@ -46,7 +55,7 @@ class DepartamentController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -57,7 +66,8 @@ class DepartamentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $departamento = Departamento::find($id);
+        return view('admin.department.edit', compact('departamento'));
     }
 
     /**
@@ -69,7 +79,10 @@ class DepartamentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $departamento = Departamento::find($id);
+        $departamento->fill($request->all())->save();
+        
+        return redirect()->route('departments.index')->with('info', 'Departamento Modificado Correctamente');
     }
 
     /**
@@ -80,6 +93,7 @@ class DepartamentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $departamento = Departamento::find($id)->delete();        
+        return back()->with('info', 'Registro Eliminado Correctamente');
     }
 }

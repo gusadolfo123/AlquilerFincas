@@ -122,7 +122,7 @@ class PageController extends Controller
         {
             $request->session()->forget('data');            
             
-            $fincas = Finca::orderBy('id', 'DESC')->paginate(6);
+            $fincas = Finca::orderBy('id', 'DESC')->paginate(10);
             $cantReg = Finca::count();
             $vias = Via::all();        
             
@@ -219,7 +219,7 @@ class PageController extends Controller
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         
         // Define how many items we want to be visible in each page
-        $perPage = 6;
+        $perPage = 10;
  
         // Slice the collection to get the items to display in current page
         $currentPageItems = $fincasTmp->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
@@ -269,7 +269,6 @@ class PageController extends Controller
                 $reservasConfirmadas[] = $date->format('d/m/Y'); 
             } 
         }
-
 
         return view('web.farm', compact(['finca', 'fechas', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia', 'path']));
     }

@@ -15,10 +15,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/jquery-ui.multidatespicker.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/bootstrap-datepicker3.css') }}" rel="stylesheet" > --}}
     <link href="{{ asset('css/flexslider.css') }}" rel="stylesheet"> 
     <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/myStyles.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/myStyles.css') }}" rel="stylesheet"> --}}
 
 </head>
 <body>
@@ -102,7 +105,7 @@
                     <div class="alert alert-danger alert-dismissible mb-0 fade show" role="alert">
                         <ul>
                             @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                                <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

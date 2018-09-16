@@ -8,16 +8,17 @@
     <div class="row">        
             <div class="col-md-12 mb-2">
                 Total: {{ $cantReg }}
+                {{-- 
                 <a href="{{ route('reservations.create') }}" class="btn btn-sm btn-primary pull-right" aria-label="Left Align">
                     Crear
-                </a>                                
-                
+                </a> 
+                --}}                
             </div>
             <table class="table table-hover text-center">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Nomb. Finca</th>
+                        <th scope="col">Finca</th>
                         <th scope="col">Fec. Reserva</th>
                         <th scope="col">Fec. Ingreso</th>
                         <th scope="col">Fec. Salida</th>
@@ -33,10 +34,10 @@
                         <tr>
                             <th scope="row">{{ $reserva->id }}</th>
                             <td>{{ $reserva->finca->nombre }}</td>
-                            <td>{{ $reserva->fec_Reserva }}</td>
-                            <td>{{ $reserva->fec_Ingreso }}</td>
-                            <td>{{ $reserva->fec_Salida }}</td>                                                
-                            <td>{{ $reserva->preCotizacion }}</td>
+                            <td>{{ \Carbon\Carbon::parse($reserva->fec_Reserva)->format('d/m/Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($reserva->fec_Ingreso)->format('d/m/Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($reserva->fec_Salida)->format('d/m/Y') }}</td>                                                                           
+                            <td>${{ number_format($reserva->preCotizacion, 0) }}</td>
                             <td>{{ $reserva->estado }}</td>
                             <td>
                         

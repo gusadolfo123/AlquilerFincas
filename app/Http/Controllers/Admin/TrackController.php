@@ -4,9 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Via;
 
 class TrackController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,10 @@ class TrackController extends Controller
      */
     public function index()
     {
-        //
+        $cantReg = Via::all()->count(); 
+        $vias = Via::orderBy('id')->paginate(10);
+                
+        return view('admin.track.index', compact('vias', 'cantReg'));
     }
 
     /**
@@ -24,7 +34,7 @@ class TrackController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.track.create');
     }
 
     /**
@@ -35,7 +45,8 @@ class TrackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $via = Via::create($request->all());         
+        return redirect()->route('tracks.index')->with('info', 'Via Creada Correctamente');    
     }
 
     /**
@@ -57,7 +68,8 @@ class TrackController extends Controller
      */
     public function edit($id)
     {
-        //
+        $via = Via::find($id);
+        return view('admin.track.edit', compact('via'));
     }
 
     /**
@@ -69,7 +81,10 @@ class TrackController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $via = Via::find($id);
+        $via->fill($request->all())->save();
+        
+        return redirect()->route('tracks.index')->with('info', 'Departamento Modificado Correctamente');
     }
 
     /**
@@ -80,6 +95,7 @@ class TrackController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $via = Via::find($id)->delete();        
+        return back()->with('info', 'Registro Eliminado Correctamente');
     }
 }

@@ -591,16 +591,22 @@
         });
 
         function fnCalcValFecha(){
-
-                var dataSel = $('#sandbox-container div').data().datepicker.dates;
                 
+                var dataSel = $('#sandbox-container div').data().datepicker.dates;                                
+
+                if(dataSel.length === 0){
+                    $("#dpEntrada").val("");
+                    $("#dpSalida").val("");
+                }
+
                 if(dataSel.length === 1)
                 {                    
                     var d1 = dataSel[0];
-                    //d1.setMinutes(0 + d1.getTimezoneOffset()); // corrige el dia que se descontaba por zona horaria
-                    var curr_date = d1.getDate() + 1;
-                    var curr_month = d1.getMonth() + 1; //los meses empiezan en cero por eso se suma 1
-                    var curr_year = d1.getFullYear();
+                    var dateP = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate() + 1, 0, 0, 0, 0);
+                    dateP.setMinutes(d1.getMinutes() + d1.getTimezoneOffset()); // corrige el dia que se descontaba por zona horaria
+                    var curr_date = dateP.getDate();
+                    var curr_month = dateP.getMonth() + 1; //los meses empiezan en cero por eso se suma 1
+                    var curr_year = dateP.getFullYear();
                     var formattedDate1 = (curr_date.toString().length == 1 ? "0" + curr_date : curr_date) + "/" + 
                                          (curr_month.toString().length == 1 ? "0" + curr_month : curr_month) + "/" + curr_year;
                     
@@ -627,10 +633,11 @@
                 {
                     
                     var d1 = dataSel[0];
-                    //d1.setMinutes(0 + d1.getTimezoneOffset());
-                    var curr_date1 = d1.getDate() + 1;
-                    var curr_month1 = d1.getMonth() + 1; //Months are zero based
-                    var curr_year1 = d1.getFullYear();
+                    var dateP = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate() + 1, 0, 0, 0, 0);
+                    dateP.setMinutes(d1.getMinutes() + d1.getTimezoneOffset()); // corrige el dia que se descontaba por zona horaria
+                    var curr_date1 = dateP.getDate();
+                    var curr_month1 = dateP.getMonth() + 1; //Months are zero based
+                    var curr_year1 = dateP.getFullYear();
                     var formattedDate1 = (curr_date1.toString().length == 1 ? "0" + curr_date1 : curr_date1) + "/" + 
                                          (curr_month1.toString().length == 1 ? "0" + curr_month1 : curr_month1) + "/" + 
                                          curr_year1;
@@ -641,9 +648,11 @@
 
                     var d2 = dataSel[1];                   
                     //d2.setMinutes(0 + d2.getTimezoneOffset());
-                    var curr_date2 = d2.getDate() + 1;
-                    var curr_month2 = d2.getMonth() + 1; //Months are zero based
-                    var curr_year2 = d2.getFullYear();
+                    var dateP2 = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate() + 1, 0, 0, 0, 0);
+                    dateP2.setMinutes(d2.getMinutes() + d2.getTimezoneOffset()); // corrige el dia que se descontaba por zona horaria
+                    var curr_date2 = dateP2.getDate();
+                    var curr_month2 = dateP2.getMonth() + 1; //Months are zero based
+                    var curr_year2 = dateP2.getFullYear();
                     var formattedDate2 = (curr_date2.toString().length == 1 ? "0" + curr_date2 : curr_date2) + "/" + 
                                          (curr_month2.toString().length == 1 ? "0" + curr_month2 : curr_month2) + "/" + 
                                          curr_year2;
@@ -732,7 +741,7 @@
                         
                         var diasTempNormal = daysDiff - (diasTempAlta + diasTempMedia + diasReservaCons);
                         
-                        console.log({'diasReservaCons': diasReservaCons,  'diasTempNormal': diasTempNormal, 'daysDiff': daysDiff, 'diasTempAlta': diasTempAlta, 'diasTempMedia': diasTempMedia});                       
+                        //console.log({'diasReservaCons': diasReservaCons,  'diasTempNormal': diasTempNormal, 'daysDiff': daysDiff, 'diasTempAlta': diasTempAlta, 'diasTempMedia': diasTempMedia});                       
                         
                         if(diasTempAlta > 0){
                             $('#fecTempAlta').removeClass('d-none');
@@ -858,7 +867,7 @@
                         
                         var diasTempNormal = daysDiff - (diasTempAlta + diasTempMedia + diasReservaCons);
                         
-                        console.log({'diasReservaCons': diasReservaCons,  'diasTempNormal': diasTempNormal, 'daysDiff': daysDiff, 'diasTempAlta': diasTempAlta, 'diasTempMedia': diasTempMedia});                       
+                        //console.log({'diasReservaCons': diasReservaCons,  'diasTempNormal': diasTempNormal, 'daysDiff': daysDiff, 'diasTempAlta': diasTempAlta, 'diasTempMedia': diasTempMedia});                       
 
                         if(diasTempAlta > 0){
                             $('#fecTempAlta').removeClass('d-none');

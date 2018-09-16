@@ -10,6 +10,12 @@ use App\Cliente;
 
 class ReservationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +58,14 @@ class ReservationController extends Controller
      */
     public function show($id)
     {
-        //
+        $reserva = Reserva::find($id);
+        $fincas = Finca::where('id', $reserva->finca_id)->first()->pluck('nombre', 'id');
+        $estados = ['CONFIRMADO' => 'CONFIRMADO', 'VERIFICACION' => 'VERIFICACION'];
+        
+        $reserva->fec_Reserva =  \Carbon\Carbon::parse($reserva->fec_Reserva)->format('Y-m-d');
+        $reserva->fec_Ingreso =  \Carbon\Carbon::parse($reserva->fec_Ingreso)->format('Y-m-d');
+        $reserva->fec_Salida =  \Carbon\Carbon::parse($reserva->fec_Salida)->format('Y-m-d');
+        return view('admin.reservation.show', compact('reserva', 'fincas', 'estados'));
     }
 
     /**
@@ -63,7 +76,15 @@ class ReservationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reserva = Reserva::find($id);
+        $fincas = Finca::where('id', $reserva->finca_id)->first()->pluck('nombre', 'id');
+        $estados = ['CONFIRMADO' => 'CONFIRMADO', 'VERIFICACION' => 'VERIFICACION'];
+        
+        $reserva->fec_Reserva =  \Carbon\Carbon::parse($reserva->fec_Reserva)->format('Y-m-d');
+        $reserva->fec_Ingreso =  \Carbon\Carbon::parse($reserva->fec_Ingreso)->format('Y-m-d');
+        $reserva->fec_Salida =  \Carbon\Carbon::parse($reserva->fec_Salida)->format('Y-m-d');
+
+        return view('admin.reservation.edit', compact('reserva', 'fincas', 'estados'));
     }
 
     /**
@@ -75,7 +96,10 @@ class ReservationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reseva = Reserva::find($id);
+        $reseva->fill($request->all())->save();
+        
+        return redirect()->route('reservations.edit', $reseva->id)->with('info', 'Reservacion Modificada Correctamente');
     }
 
     /**
@@ -86,6 +110,7 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reserva = Reserva::find($id)->delete();        
+        return back()->with('info', 'Registro Eliminado Correctamente');
     }
 }
