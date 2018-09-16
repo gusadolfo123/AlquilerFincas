@@ -16,14 +16,18 @@
                     <div class="row justify-content-start">
                         <div class="col-10">
                             <div class="row">
-                                <div class="col-12 col-sm-6">
+                                <div class="col-12 col-sm-4">
                                     <label class="mb-0" for="exampleInputEmail1">Direccion</label>                        
                                     <small id="emailHelp" class="form-text text-muted mt-0">{{ $finca->direccion }}</small>
                                 </div>
-                                <div class="col-12 col-sm-6">
+                                <div class="col-12 col-sm-4">
+                                    <label class="mb-0" for="exampleInputEmail1">Departamento</label>                        
+                                    <small id="emailHelp" class="form-text text-muted mt-0">{{ $finca->departamento->descripcion }}</small>
+                                </div>    
+                                <div class="col-12 col-sm-4">
                                     <label class="mb-0" for="exampleInputEmail1">Via</label>                        
                                     <small id="emailHelp" class="form-text text-muted mt-0">{{ $finca->via->descripcion }}</small>
-                                </div>                                
+                                </div>                            
                             </div>                                                                                    
                         </div>                        
                     </div>                    

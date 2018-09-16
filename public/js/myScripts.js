@@ -89,3 +89,8 @@ function getFarmsWithFilter(page) {
         $("#contFincas").html(data);
     });
 }
+
+function validaFecha(fecDesde, fecHasta) {
+    document.querySelector("#dpEntradaModal").value = fecDesde;
+    document.querySelector("#dpSalidaModal").value = fecHasta;
+}

@@ -31,7 +31,7 @@ class FarmController extends Controller
         //
         $cantReg = Finca::all()->count(); 
         $fincas = Finca::orderBy('id')->paginate(10);
-
+                
         return view('admin.farm.index', compact('fincas', 'cantReg'));
     }
 

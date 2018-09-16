@@ -133,10 +133,7 @@
         <script src="{{ asset('js/myScripts.js') }}"></script>
 
         <script>
-
-
             
-
             $(function() {                                     
 
                 $('#formSearch').on('submit', function(e){
@@ -156,7 +153,8 @@
                 
                 var dateNow = new Date();
                 var now = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate(), 0, 0, 0, 0);
-                
+                //var now = new Date();
+
                 var active_dates = [
                         @if(isset($fechas))
                             @foreach ($fechas as $fe)
@@ -176,10 +174,11 @@
                 var fecReservadas = [
                             @if(isset($reservasConfirmadas))
                                 @foreach ($reservasConfirmadas as $reserva)
-                                    "{{ date_format(date_create($reserva->fec_Ingreso), 'd/m/Y') }}", 
+                                    "{{ $reserva }}", 
                                 @endforeach
                             @endif
                         ];
+                
 
                 var tempMedia = [
                             @if(isset($fecMedia))
@@ -197,6 +196,9 @@
                     orientation: "bottom auto",
                     minDate: 0,
                     beforeShowDay: function (date) {
+
+                        //date.setMinutes(date.getMinutes() + date.getTimezoneOffset()); 
+
                         if(date >= now)
                         {
                             var d = date;
@@ -238,7 +240,8 @@
                     },
                     autoclose: true
                 }).on('changeDate', function (ev) {
-                    if (ev.date > checkout.datepicker("getDate") || !checkout.datepicker("getDate")) {
+                    if (ev.date > checkout.datepicker("getDate") || !checkout.datepicker("getDate")) 
+                    {
                         var newDate = new Date(ev.date);
                         newDate.setDate(newDate.getDate() + 1);
                         checkout.datepicker("update", newDate);
@@ -251,6 +254,7 @@
                     format: "dd/mm/yyyy",
                     orientation: "bottom auto",
                     beforeShowDay: function (date) {
+                        
                         if (!checkin.datepicker("getDate")) {
                             if(date >= new Date())
                             {
@@ -266,7 +270,6 @@
                                         classes: 'activeClass',
                                     };
                                 }
-
 
                                 if ($.inArray(formattedDate, fecReservadas) != -1){
                                     return 'disabled';
@@ -304,7 +307,6 @@
                                     };
                                 }
 
-
                                 if ($.inArray(formattedDate, fecReservadas) != -1){
                                     return 'disabled';
                                 }
@@ -329,70 +331,7 @@
                     },
                     autoclose: true
                 });
-                
-                // $.datepicker.regional['es'] = { closeText: 'Cerrar',
-                //                                 prevText: '< Ant',
-                //                                 nextText: 'Sig >',
-                //                                 currentText: 'Hoy',
-                //                                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                //                                 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-                //                                 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                //                                 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-                //                                 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-                //                                 weekHeader: 'Sm',
-                //                                 dateFormat: 'dd/mm/yy',
-                //                                 firstDay: 1,
-                //                                 isRTL: false,
-                //                                 showMonthAfterYear: false,
-                //                                 yearSuffix: ''
-                // };
-                
-                // $.datepicker.setDefaults($.datepicker.regional['es']);
-                
-                // let date1 = new Date();
-                // $("#datePickerEntrada").multiDatesPicker({
-                //     minDate: 0,                
-                //     maxPicks: 1,
-                //     onSelect:function(){
-                //         var date = $('#datePickerEntrada').multiDatesPicker('getDates');
-                //         if(date.length > 0)
-                //         {
-                            
-                //             var day = date1.getDate();
-                //             var monthIndex = date1.getMonth() + 1;
-                //             var year = date1.getFullYear();
-                            
-                //             var strDate = date[0].toString();
-                //             let datePrueba = strDate.substring(3,5) + "/" + strDate.substr(0,2) + "/" + strDate.substr(6,7);
-                            
-                //             var fecha1 = moment(date1).format('l');
-                //             var fecha2 = moment(datePrueba).format('l');
-                            
-                //             let date11 = new Date(fecha1);
-                //             let date22 = new Date(fecha2);
-
-                //             let  Dif = date22.getTime() - date11.getTime();
-                //             let dias = Math.floor(Dif/(1000*24*60*60));
-
-                        
-                //             $('#datePickerSalida').datepicker('destroy');
-                //             $("#datePickerSalida").multiDatesPicker({
-                //                 minDate: dias + 1,
-                //             });
-                //         }
-                //         else
-                //         {
-                //             var strDate = "0";
-                //             $('#datePickerSalida').multiDatesPicker('resetDates', 'picked');
-                //         }
-                            
-                //     }
-                // });
-                
-                // $("#datePickerSalida").multiDatesPicker({
-                //     minDate: 0,
-                //     maxPicks: 1
-                // });
+                               
 
                 $("#numPersonas").on("keyup",function(){
                     if($("#numPersonas").val() > 99)
@@ -400,6 +339,12 @@
                 });
                 
             });
+
+            Date.prototype.addDays = function(days) {
+                var date = new Date(this.valueOf());
+                date.setDate(date.getDate() + days);
+                return date;
+            }
         </script>
 
         @yield('scripts')

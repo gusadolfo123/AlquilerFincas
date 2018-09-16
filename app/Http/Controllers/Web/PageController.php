@@ -253,12 +253,28 @@ class PageController extends Controller
         $fecha = Carbon::now();
         $path = base_path().'/uploads/images/';
 
-        $reservasConfirmadas = Reserva::where([['finca_id', $finca->id], ['fec_ingreso', '>=' , $fecha ], ['estado', 'CONFIRMADO']])->get();
+        $dateReservasConfirmadas = Reserva::where([['finca_id', $finca->id], ['fec_ingreso', '>=' , $fecha ], ['estado', 'CONFIRMADO']])->get();
         $reservasVerificacion = Reserva::where([['finca_id', $finca->id], ['fec_ingreso', '>=' , $fecha ], ['estado', 'VERIFICACION']])->get();
+
+        $reservasConfirmadas = [];
+
+        foreach($dateReservasConfirmadas as $element) 
+        {
+           $in = Carbon::parse($element->fec_Ingreso);
+            $out = Carbon::parse($element->fec_Salida);
+
+            
+            for($date = $in; $date->lte($out); $date->addDay()) 
+            { 
+                $reservasConfirmadas[] = $date->format('d/m/Y'); 
+            } 
+        }
+
 
         return view('web.farm', compact(['finca', 'fechas', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia', 'path']));
     }
 
+  
 
     public function sendMessage(Request $request)
     {

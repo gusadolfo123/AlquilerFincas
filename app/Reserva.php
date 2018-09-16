@@ -9,8 +9,8 @@ class Reserva extends Model
     //
     public $timestamps = false;
     protected $fillable = [
-            'finca_id', 'cliente_id', 'fec_Reserva', 'fec_Ingreso',
-            'fec_Salida', 'preCotizacion', 'requerimientos', 'cant_huespedes', 'estado'
+            'fec_Reserva', 'fec_Ingreso',
+            'fec_Salida', 'preCotizacion', 'requerimientos', 'cant_huespedes', 'estado', 'finca_id', 'cliente_id'
         ];
 
     public function finca(){

@@ -16,7 +16,7 @@
             <table class="table table-hover text-center">
                 <thead class="thead-dark">
                     <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Precio Baja</th>
                     <th scope="col">Precio Media</th>

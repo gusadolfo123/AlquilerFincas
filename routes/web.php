@@ -33,3 +33,4 @@ Route::resource('seasons', 'Admin\SeasonController');
 Route::resource('departments', 'Admin\DepartamentController');
 Route::resource('tracks', 'Admin\TrackController');
 Route::resource('customers', 'Admin\CustomerController');
+Route::resource('reservations', 'Admin\ReservationController');

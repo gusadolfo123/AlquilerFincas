@@ -171,7 +171,7 @@
 
                             <div class="row">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-success p-2 col-12 d-none" id="btnConfirmar" data-toggle="modal" data-target="#exampleModalCenter">
+                                <button type="button" class="btn btn-success p-2 col-12 d-none" onclick="validaFecha(document.querySelector('#dpEntrada').value, document.querySelector('#dpSalida').value);" id="btnConfirmar" data-toggle="modal" data-target="#exampleModalCenter">
                                     Confirmar
                                 </button>
                             </div>
@@ -296,11 +296,11 @@
                             <label class="text-dark"><strong>Fechas</strong></label> 
                             <div class="input-group">
                                 @if(isset($data))
-                                <input id="dpEntrada" name="fecEntrada"  class="form-control letra" placeholder="Entrada" readonly="readonly" value="{{ $data['fecEntrada'] }}" required>  
-                                <input id="dpSalida" name="fecSalida" class="form-control letra" placeholder="Salida" readonly="readonly" value="{{ $data['fecSalida'] }}" required>
+                                <input id="dpEntradaModal" name="fecEntrada"  class="form-control letra" placeholder="Entrada" readonly="readonly" value="{{ $data['fecEntrada'] }}" required>  
+                                <input id="dpSalidaModal" name="fecSalida" class="form-control letra" placeholder="Salida" readonly="readonly" value="{{ $data['fecSalida'] }}" required>
                                 @else
-                                <input id="dpEntrada" name="fecEntrada"  class="form-control letra" placeholder="Entrada" readonly="readonly" required>  
-                                <input id="dpSalida" name="fecSalida" class="form-control letra" placeholder="Salida" readonly="readonly" required>
+                                <input id="dpEntradaModal" name="fecEntrada"  class="form-control letra" placeholder="Entrada" readonly="readonly" required>  
+                                <input id="dpSalidaModal" name="fecSalida" class="form-control letra" placeholder="Salida" readonly="readonly" required>
                                 @endif
                             </div>      
                         </div>
@@ -399,7 +399,7 @@
         var fecReservadas = [
                     @if(isset($reservasConfirmadas))
                         @foreach ($reservasConfirmadas as $reserva)
-                            "{{ date_format(date_create($reserva->fec_Ingreso), 'd/m/Y') }}", 
+                            "{{ $reserva }}", 
                         @endforeach
                     @endif
                 ];
@@ -412,13 +412,15 @@
                     @endif
                 ];
 
+
         $(window).load(function(){
             
             var dateNow = new Date();
             var now = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate(), 0, 0, 0, 0);
+            //var now = new Date();;
             
-            $("#enviarCotizacion").on("submit", function(e) {
-                
+
+            $("#enviarCotizacion").on("submit", function(e) {                
                 
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
@@ -446,8 +448,8 @@
                 let tel2 = $('#tel2').val();
                 let comentarios = $('#comentarios').val();
 
-                let fecDesde = $('#dpEntrada').val();
-                let fecHasta = $('#dpSalida').val();
+                let fecDesde = $('#dpEntradaModal').val();
+                let fecHasta = $('#dpSalidaModal').val();
 
                 let cantHuespedes = $('#cantHuespedesModal').val();
 
@@ -476,8 +478,6 @@
                             'cantHuespedes': cantHuespedes
                         };
                 
-                //console.log(data);
-
                 e.preventDefault(e);
                            
                 $.ajaxSetup({
@@ -524,6 +524,9 @@
                 minDate: 0,                
                 multidate: 2,                
                 beforeShowDay: function (date) {
+                    
+                    //date.setMinutes(date.getMinutes() + date.getTimezoneOffset()); 
+                    
                     if(date >= now)
                     {
                         var d = date;
@@ -550,11 +553,11 @@
                         }
                        
                         return;
-                    }else{
+                    }else{                        
                         return date >= now;
                     }
                 },
-                onRender: function (date) {
+                onRender: function (date) {                    
                     return date < now ? 'disabled' : '';
                 }                               
             })
@@ -594,12 +597,13 @@
                 if(dataSel.length === 1)
                 {                    
                     var d1 = dataSel[0];
+                    //d1.setMinutes(0 + d1.getTimezoneOffset()); // corrige el dia que se descontaba por zona horaria
                     var curr_date = d1.getDate() + 1;
-                    var curr_month = d1.getMonth() + 1; //Months are zero based
+                    var curr_month = d1.getMonth() + 1; //los meses empiezan en cero por eso se suma 1
                     var curr_year = d1.getFullYear();
                     var formattedDate1 = (curr_date.toString().length == 1 ? "0" + curr_date : curr_date) + "/" + 
                                          (curr_month.toString().length == 1 ? "0" + curr_month : curr_month) + "/" + curr_year;
-
+                    
                     $("#dpEntrada").val(formattedDate1);
                     $("#dpSalida").val("");                    
                     
@@ -623,6 +627,7 @@
                 {
                     
                     var d1 = dataSel[0];
+                    //d1.setMinutes(0 + d1.getTimezoneOffset());
                     var curr_date1 = d1.getDate() + 1;
                     var curr_month1 = d1.getMonth() + 1; //Months are zero based
                     var curr_year1 = d1.getFullYear();
@@ -630,51 +635,104 @@
                                          (curr_month1.toString().length == 1 ? "0" + curr_month1 : curr_month1) + "/" + 
                                          curr_year1;
                     
+                    var dd1 = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate() + 1, 0, 0, 0, 0);
+
                     $("#dpEntrada").val(formattedDate1);
 
-                    var d2 = dataSel[1];
+                    var d2 = dataSel[1];                   
+                    //d2.setMinutes(0 + d2.getTimezoneOffset());
                     var curr_date2 = d2.getDate() + 1;
                     var curr_month2 = d2.getMonth() + 1; //Months are zero based
                     var curr_year2 = d2.getFullYear();
                     var formattedDate2 = (curr_date2.toString().length == 1 ? "0" + curr_date2 : curr_date2) + "/" + 
                                          (curr_month2.toString().length == 1 ? "0" + curr_month2 : curr_month2) + "/" + 
                                          curr_year2;
+
+                    var dd2 = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate() + 1, 0, 0, 0, 0);
                     
-                    if(d2 < d1)
+
+                    if(dd2 < dd1)
                     {
                         $("#dpEntrada").val(formattedDate2);
                         $("#dpSalida").val(formattedDate1);
                                                 
-                        var timeDiff = d2 - d1;
+                        var timeDiff = dd2 - dd1;
                         var daysDiff = Math.abs(Math.floor(timeDiff / (1000 * 60 * 60 * 24)));
-
-                        $("#nroNoches").html(daysDiff);
                         
-                        var diasTempAlta = 0, diasTempMedia = 0, valTotal = 0;
-                   
+                        var diasTempAlta = 0, diasTempMedia = 0, valTotal = 0, diasReservaCons = 0;
+                                           
+                        fecReservadas.forEach(element => {
+                            
+                            let strDate = element.toString();
+                            let fec = new Date(strDate.substr(6,7), strDate.substring(3,5) - 1, strDate.substr(0,2));                            
+                            
+                            if( fec <= dd1 && fec >= dd2 )
+                                diasReservaCons++;
+                        });
+                        
+                        var snReservado = false;
 
                         tempAlta.forEach(element => {
                             
                             let strDate = element.toString();
-                            let datePrueba = strDate.substring(3,5) + "/" + strDate.substr(0,2) + "/" + strDate.substr(6,7);
                             let fec = new Date(strDate.substr(6,7), strDate.substring(3,5) - 1, strDate.substr(0,2));
+                                                                              
+                            if(fec <= dd1 && fec >= dd2)
+                            {
+
+                                fecReservadas.forEach(element2 => {
+                                    
+                                    let strDate2 = element2.toString();                                    
+                                    let fec2 = new Date(strDate2.substr(6,7), strDate2.substring(3,5) - 1, strDate2.substr(0,2));
+                                    
+                                    if(fec2.valueOf() == fec.valueOf())
+                                        snReservado = true;                                       
+                                    
+                                });
+
+                                if(!snReservado)
+                                    diasTempAlta++;
+
+                            }    
                             
-                            if(fec <= d1 && fec >= d2)
-                                diasTempAlta++;
                         });
+                        
+                        snReservado = false;
 
                         tempMedia.forEach(element => {
                             
                             let strDate = element.toString();
-                            let datePrueba = strDate.substring(3,5) + "/" + strDate.substr(0,2) + "/" + strDate.substr(6,7);
                             let fec = new Date(strDate.substr(6,7), strDate.substring(3,5) - 1, strDate.substr(0,2));
                             
-                            if(fec <= d1 && fec >= d2)
-                                diasTempMedia++;
+                            if(fec <= dd1 && fec >= dd2)
+                            {
+                                let aux = 0;
+                                let lng = fecReservadas.length - 1;
 
-                        });
+                                while (snReservado != true && aux <= lng) 
+                                {
+                                    let element2 = fecReservadas[aux];
+
+                                    let strDate2 = element2.toString();
+                                    let fec2 = new Date(strDate2.substr(6,7), strDate2.substring(3,5) - 1, strDate2.substr(0,2));
+                                    
+                                    if(fec2.valueOf() == fec.valueOf()){
+                                        snReservado = true;
+                                        break;
+                                    }
+                                    
+                                    aux++;
+                                }
+                              
+                                if(!snReservado)
+                                    diasTempMedia++;
+                            }                                                          
+
+                        });                                                
                         
-                        var diasTempNormal = daysDiff - (diasTempAlta + diasTempMedia);
+                        var diasTempNormal = daysDiff - (diasTempAlta + diasTempMedia + diasReservaCons);
+                        
+                        console.log({'diasReservaCons': diasReservaCons,  'diasTempNormal': diasTempNormal, 'daysDiff': daysDiff, 'diasTempAlta': diasTempAlta, 'diasTempMedia': diasTempMedia});                       
                         
                         if(diasTempAlta > 0){
                             $('#fecTempAlta').removeClass('d-none');
@@ -725,36 +783,83 @@
                         $("#dpEntrada").val(formattedDate1);
                         $("#dpSalida").val(formattedDate2);
 
-                        var timeDiff = d1 - d2;
-                        var daysDiff = Math.abs(Math.floor(timeDiff / (1000 * 60 * 60 * 24)));
-
-                        $("#nroNoches").html(daysDiff);
+                        var timeDiff = dd1 - dd2;
+                        var daysDiff = Math.abs(Math.floor(timeDiff / (1000 * 60 * 60 * 24)));     
                         
-                        var diasTempAlta = 0, diasTempMedia = 0, valTotal = 0;
-                   
+                        var diasTempAlta = 0, diasTempMedia = 0, valTotal = 0, diasReservaCons = 0;
+                        
+                        fecReservadas.forEach(element => {
+                            
+                            let strDate = element.toString();
+                            let datePrueba = strDate.substring(3,5) + "/" + strDate.substr(0,2) + "/" + strDate.substr(6,7);
+                            let fec = new Date(strDate.substr(6,7), strDate.substring(3,5) - 1, strDate.substr(0,2));
+                            
+                            if(fec >= dd1 && fec <= dd2)
+                                diasReservaCons++;
+                        });
+
+                        var snReservado = false;
+
                         tempAlta.forEach(element => {
                             
                             let strDate = element.toString();
-                            let datePrueba = strDate.substring(3,5) + "/" + strDate.substr(0,2) + "/" + strDate.substr(6,7);
                             let fec = new Date(strDate.substr(6,7), strDate.substring(3,5) - 1, strDate.substr(0,2));
                             
-                            if(fec <= d2 && fec >= d1)
-                                diasTempAlta++;
+                            if(fec <= dd2 && fec >= dd1)
+                            {
+                                fecReservadas.forEach(element2 => {
+                                    
+                                    let strDate2 = element2.toString();                                    
+                                    let fec2 = new Date(strDate2.substr(6,7), strDate2.substring(3,5) - 1, strDate2.substr(0,2));
+                                    
+                                    if(fec2.valueOf() == fec.valueOf())
+                                        snReservado = true;                                       
+                                    
+                                });
+
+                                if(!snReservado)
+                                    diasTempAlta++;
+
+                            }    
                         });
+
+                        snReservado = false;
 
                         tempMedia.forEach(element => {
                             
-                            let strDate = element.toString();
-                            let datePrueba = strDate.substring(3,5) + "/" + strDate.substr(0,2) + "/" + strDate.substr(6,7);
+                            let strDate = element.toString();                            
                             let fec = new Date(strDate.substr(6,7), strDate.substring(3,5) - 1, strDate.substr(0,2));
                             
-                            if(fec <= d2 && fec >= d1)
-                                diasTempMedia++;
+                            if(fec <= dd2 && fec >= dd1)
+                            {
+                                let aux = 0;
+                                let lng = fecReservadas.length - 1;
+
+                                while (snReservado != true && aux <= lng) 
+                                {
+                                    let element2 = fecReservadas[aux];
+
+                                    let strDate2 = element2.toString();
+                                    let fec2 = new Date(strDate2.substr(6,7), strDate2.substring(3,5) - 1, strDate2.substr(0,2));
+                                    
+                                    if(fec2.valueOf() == fec.valueOf()){
+                                        snReservado = true;
+                                        break;
+                                    }
+                                    
+                                    aux++;
+                                }
+                              
+                                if(!snReservado)
+                                    diasTempMedia++;
+                            }                                                           
 
                         });
                         
-                        var diasTempNormal = daysDiff - (diasTempAlta + diasTempMedia);
+                        var diasTempNormal = daysDiff - (diasTempAlta + diasTempMedia + diasReservaCons);
                         
+                        console.log({'diasReservaCons': diasReservaCons,  'diasTempNormal': diasTempNormal, 'daysDiff': daysDiff, 'diasTempAlta': diasTempAlta, 'diasTempMedia': diasTempMedia});                       
+
                         if(diasTempAlta > 0){
                             $('#fecTempAlta').removeClass('d-none');
                             $('#totalNochesTempAlta').removeClass('d-none');
