@@ -326,6 +326,31 @@ class PageController extends Controller
         $objDemo->sender = 'AlquilamosFincas.com';
                 
         Mail::to($data['correo'])->send(new ConfirmacionPreReserva($objDemo));
+        
+
+        /* Datos Para enviar al Administrador */
+        $obj = new \stdClass();    
+        $obj->nomFinca = $data['nomFinca'];
+        $obj->valNocheTempAlta = $data['valNocheTempAlta'];
+        $obj->valNocheTempMedia = $data['valNocheTempMedia'];
+        $obj->valNocheTempNormal = $data['valNocheTempNormal'];
+        $obj->nroNochesN = $data['nroNochesN'];
+        $obj->nroNochesM = $data['nroNochesM'];
+        $obj->nroNochesA = $data['nroNochesA'];
+        $obj->totalNochesTempNormal = $data['totalNochesTempNormal'];
+        $obj->totalNochesTempMedia = $data['totalNochesTempMedia'];
+        $obj->totalNochesTempAlta = $data['totalNochesTempAlta'];
+        $obj->totalCotizacion = $data['totalCotizacion'];
+        $obj->nomCompleto = $data['nomCompleto'];
+        $obj->correo = $data['correo'];
+        $obj->telefono1 = $data['telefono1'];
+        $obj->telefono2 = $data['telefono2'];
+        $obj->comentarios = $data['comentarios'];
+        $obj->fecDesde = $data['fecDesde'];
+        $obj->fecHasta = $data['fecHasta'];
+        $obj->nroReserva = $reservaC->id;
+
+        Mail::to('gusadolfo123@gmail.com')->send(new SendEmail($obj));
 
         return response()->json(['responseText' => 'Success!'], 200);
     }
