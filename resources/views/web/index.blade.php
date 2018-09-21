@@ -38,7 +38,10 @@
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                 <div class="form-group text-center">     
                     <label for="txtDepartamento" class="text-white">Departamento</label> 
-                    <input id="txtDepartamento" name="departamento" class="form-control" type="text" placeholder="Departamento" required>
+                    {{-- <input id="txtDepartamento" name="departamento" class="form-control" type="text" placeholder="Departamento" required> --}}
+                    <div class="form-group">
+                        {!! Form::select('departamento_id', $departamentos, null, ['class' => 'form-control', 'required', 'placeholder' => 'Departamento...', 'id' => 'departamento_id']) !!}      
+                    </div>
                 </div>
             </div>      
             <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pb-3">
@@ -57,42 +60,15 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block w-100" src="img/1.jpg" alt="First slide">
-            <div class="container">
-                <div class="carousel-caption text-left">
-                    <h1>Example headline.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
-                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p>
-                        <a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a>
-                    </p>
-                </div>
-            </div>
+            
         </div>
         <div class="carousel-item">
             <img class="d-block w-100" src="img/2.jpg" alt="Second slide">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
-                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p>
-                        <a class="btn btn-lg btn-success" href="#" role="button">Learn more</a>
-                    </p>
-                </div>
-            </div>
+            
         </div>
         <div class="carousel-item">
             <img class="d-block w-100" src="img/3.jpg" alt="Third slide">
-            <div class="container">
-                <div class="carousel-caption text-right">
-                    <h1>One more for good measure.</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
-                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p>
-                        <a class="btn btn-lg btn-success" href="#" role="button">Browse gallery</a>
-                    </p>
-                </div>
-            </div>
+            
         </div>
     </div>
     <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">

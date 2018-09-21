@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use App\Mail\SendEmail;
 use App\Mail\ConfirmacionPreReserva;
+use App\Mail\MensajeAlquilerFincas;
 use App\Finca;
 use App\Temporada;
 use App\Via;
@@ -36,8 +37,13 @@ class PageController extends Controller
         
         $reservasConfirmadas = Reserva::where([['fec_ingreso', '>=' , $fecha ], ['estado', 'CONFIRMADO']])->get();
         $reservasVerificacion = Reserva::where([['fec_ingreso', '>=' , $fecha ], ['estado', 'VERIFICACION']])->get();
+        $deps = Departamento::select('id', 'descripcion')->get();
+        foreach ($deps as $dep) {
+            $departamentos[$dep->id] = $dep->descripcion;    
+        }
 
-        return view("web.index", compact('fechas', 'fecMedia', 'reservasConfirmadas', 'reservasVerificacion'));
+
+        return view("web.index", compact('fechas', 'fecMedia', 'reservasConfirmadas', 'reservasVerificacion', 'departamentos'));
     }
 
     public function about()
@@ -118,7 +124,8 @@ class PageController extends Controller
         
         $data = request()->all();
         
-        if($data == null || ($data != null  && !isset($data['p']) && !isset($data['departamento'])))
+        
+        if($data == null || ($data != null  && !isset($data['p']) && !isset($data['departamento_id'])))
         {
             $request->session()->forget('data');            
             
@@ -133,15 +140,20 @@ class PageController extends Controller
             $reservasConfirmadas = Reserva::where([['fec_ingreso', '>=' , $fecha ], ['estado', 'CONFIRMADO']])->get();
             $reservasVerificacion = Reserva::where([['fec_ingreso', '>=' , $fecha ], ['estado', 'VERIFICACION']])->get();
 
+            $deps = Departamento::select('id', 'descripcion')->get();
+            foreach ($deps as $dep) {
+                $departamentos[$dep->id] = $dep->descripcion;    
+            }
+
             if($request->ajax())
-                return view('web.list.listFarms ', compact(['fincas', 'cantReg', 'fecMedia', 'reservasConfirmadas', 'reservasVerificacion']));
+                return view('web.list.listFarms ', compact(['fincas', 'cantReg', 'fecMedia', 'reservasConfirmadas', 'reservasVerificacion', 'departamentos']));
             else
-                return view('web.farms', compact(['fincas', 'cantReg', 'vias', 'fechas', 'fecMedia', 'reservasConfirmadas', 'reservasVerificacion']));
+                return view('web.farms', compact(['fincas', 'cantReg', 'vias', 'fechas', 'fecMedia', 'reservasConfirmadas', 'reservasVerificacion', 'departamentos']));
         }
         
         
 
-        if(!isset($data['departamento']))
+        if(!isset($data['departamento_id']))
             $data = session()->get('data');
 
         
@@ -150,7 +162,7 @@ class PageController extends Controller
         $sql = "SELECT  f.*
                 FROM    fincas f JOIN departamentos c
                             ON  f.departamento_id = c.id AND
-                                c.descripcion =?  AND
+                                c.id =?  AND
                                 f.max_personas >= ? 
                         JOIN reservas r
                             ON  r.finca_id = f.id AND
@@ -161,7 +173,7 @@ class PageController extends Controller
                 SELECT  f.*
                 FROM    fincas f JOIN departamentos c
                             ON  f.departamento_id = c.id AND
-                                c.descripcion =? AND
+                                c.id =? AND
                                 f.max_personas >= ? 
                         JOIN reservas r
                             ON  r.finca_id = f.id AND
@@ -173,14 +185,14 @@ class PageController extends Controller
                 SELECT  f.*
                 FROM    fincas f JOIN departamentos c
                             ON  f.departamento_id = c.id AND
-                                c.descripcion =? AND
+                                c.id =? AND
                                 f.id NOT IN (SELECT finca_id FROM reservas) AND
                                 f.max_personas >= ? 
                         JOIN vias v
                         	ON	f.via_id = v.id";
 
-        $fincasR = DB::select($sql,array($data['departamento'], $data['cantHuespedes'], $data['departamento'], $data['cantHuespedes'], 
-                                         $data['fecSalida'], $data['departamento'], $data['cantHuespedes']));
+        $fincasR = DB::select($sql,array($data['departamento_id'], $data['cantHuespedes'], $data['departamento_id'], $data['cantHuespedes'], 
+                                         $data['fecSalida'], $data['departamento_id'], $data['cantHuespedes']));
         
         $fincasTmp = collect(new Finca);
         $viasC = collect(new Via);
@@ -237,10 +249,15 @@ class PageController extends Controller
         $reservasConfirmadas = Reserva::where([['fec_ingreso', '>=' , $fecha ], ['estado', 'CONFIRMADO']])->get();
         $reservasVerificacion = Reserva::where([['fec_ingreso', '>=' , $fecha ], ['estado', 'VERIFICACION']])->get();
 
+        $deps = Departamento::select('id', 'descripcion')->get();
+        foreach ($deps as $dep) {
+            $departamentos[$dep->id] = $dep->descripcion;    
+        }
+
         if($request->ajax())
-                return view('web.list.listFarms ', compact(['fincas', 'cantReg', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia']));
+                return view('web.list.listFarms ', compact(['fincas', 'cantReg', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia', 'departamentos']));
             else
-                return view('web.farms', compact(['fincas', 'cantReg', 'vias', 'fechas', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia']));
+                return view('web.farms', compact(['fincas', 'cantReg', 'vias', 'fechas', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia', 'departamentos']));
 
     }
 
@@ -270,10 +287,30 @@ class PageController extends Controller
             } 
         }
 
-        return view('web.farm', compact(['finca', 'fechas', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia', 'path']));
+        $deps = Departamento::select('id', 'descripcion')->get();
+        foreach ($deps as $dep) {
+            $departamentos[$dep->id] = $dep->descripcion;    
+        }
+
+        return view('web.farm', compact(['finca', 'fechas', 'data', 'reservasConfirmadas', 'reservasVerificacion', 'fecMedia', 'path', 'departamentos']));
     }
 
-  
+    public function sendMessageContact(Request $request)
+    {
+        $data = $request->all();
+        
+        /* Datos Para enviar al Administrador */
+        $obj = new \stdClass();    
+        $obj->fname = $data['fname'];
+        $obj->email = $data['email'];
+        $obj->phone = $data['phone'];
+        $obj->subject = $data['subject'];
+        $obj->message = $data['message'];
+        
+        Mail::to('gusadolfo123@gmail.com')->send(new MensajeAlquilerFincas($obj));
+
+        return response()->json(['responseText' => 'Success!'], 200);
+    }
 
     public function sendMessage(Request $request)
     {

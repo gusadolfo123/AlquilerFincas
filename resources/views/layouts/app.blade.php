@@ -17,12 +17,10 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-        <!-- <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet" /> -->
-        <!-- <link href="{{ asset('css/jquery-ui.multidatespicker.css') }}" rel="stylesheet" /> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/flexslider.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/bootstrap-datepicker3.css') }}" rel="stylesheet" >
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+        <link href="{{ asset('css/bootstrap-datepicker3.css') }}" rel="stylesheet" >        
         <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet">
         <link href="{{ asset('css/myStyles.css') }}" rel="stylesheet">
         
@@ -31,9 +29,18 @@
     </head>
     <!-- <body class="myBody my-4 example"> -->
     <body class=" bg-primary">
-
-        <div id="app" class="container">
         
+        <div id="app" class="container">
+            
+            <div class="row-fluid mar-zero ">
+                <div class="text-center my-2 my-lg-0 d-block d-sm-none my-0 mt-0">
+                    <a href="https://www.facebook.com/Alquilamosfinks/"  target="_blank" class="fa fa-facebook"></a>
+                    <a href="https://twitter.com/Alquilamosfinks"  target="_blank" class="fa fa-twitter"></a>
+                    <a href="https://www.instagram.com/alquilamosfincas01/"  target="_blank" class="fa fa-instagram"></a>
+                    <a href="https://wa.me/573143151172"  target="_blank" class="fa fa-whatsapp"></a>                        
+                </div>
+            </div> 
+            
             <nav class="navbar navbar-expand-lg navbar-dark bg-success centrar_texto">
                 
                 <!-- <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 mt-md-0 mt-4 py-3 text-center"> -->
@@ -73,7 +80,7 @@
                     </div>
                 </div>
             </nav>
-
+            
             <main>                
                 @yield('content')
             </main>

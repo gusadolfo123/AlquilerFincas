@@ -36,9 +36,11 @@
                 <div class="form-group text-center">     
                     <label for="txtDepartamento" class="text-white">Departamento</label> 
                     @if(isset($data))
-                    <input id="txtDepartamento" name="departamento" class="form-control" type="text" placeholder="Departamento" value="{{ $data['departamento'] }}" required>                
+                    {{-- <input id="txtDepartamento" name="departamento" class="form-control" type="text" placeholder="Departamento" value="{{ $data['departamento'] }}" required>                 --}}
+                    {!! Form::select('departamento_id', $departamentos,  $data['departamento_id'], ['class' => 'form-control', 'required', 'placeholder' => 'Departamento...', 'id' => 'departamento_id']) !!}      
                     @else
-                    <input id="txtDepartamento" name="departamento" class="form-control" type="text" placeholder="Departamento" required>          
+                    {{-- <input id="txtDepartamento" name="departamento" class="form-control" type="text" placeholder="Departamento" required>           --}}
+                    {!! Form::select('departamento_id', $departamentos, null, ['class' => 'form-control', 'required', 'placeholder' => 'Departamento...', 'id' => 'departamento_id']) !!}      
                     @endif
                 </div>
             </div>      

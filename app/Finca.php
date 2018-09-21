@@ -72,7 +72,7 @@ class Finca extends Model
             $sql = "SELECT  f.*
                 FROM    fincas f JOIN departamentos c
                             ON  f.departamento_id = c.id AND
-                                c.descripcion =?  AND
+                                c.id =?  AND
                                 f.max_personas >= ?
                         JOIN reservas r
                             ON  r.finca_id = f.id AND
@@ -83,7 +83,7 @@ class Finca extends Model
                 SELECT  f.*
                 FROM    fincas f JOIN departamentos c
                             ON  f.departamento_id = c.id AND
-                                c.descripcion =? AND
+                                c.id =? AND
                                 f.max_personas >= ?
                         JOIN reservas r
                             ON  r.finca_id = f.id AND
@@ -95,14 +95,14 @@ class Finca extends Model
                 SELECT  f.*
                 FROM    fincas f JOIN departamentos c
                             ON  f.departamento_id = c.id AND
-                                c.descripcion =? AND
+                                c.id =? AND
                                 f.id NOT IN (SELECT finca_id FROM reservas) AND
                                 f.max_personas >= ?
                         JOIN vias v
                             ON	f.via_id = v.id";
 
-            $collection = collect(DB::select($sql,array($data['departamento'], $data['cantHuespedes'], $data['departamento'], $data['cantHuespedes'], 
-                                             $data['fecSalida'], $data['departamento'], $data['cantHuespedes'])));
+            $collection = collect(DB::select($sql,array($data['departamento_id'], $data['cantHuespedes'], $data['departamento_id'], $data['cantHuespedes'], 
+                                             $data['fecSalida'], $data['departamento_id'], $data['cantHuespedes'])));
         }else
         {
             if ($filtros['via'] == "undefined") $filtros['via'] = null;
@@ -110,7 +110,7 @@ class Finca extends Model
             $sql = "SELECT  f.*
                     FROM    fincas f JOIN departamentos c
                                 ON  f.departamento_id = c.id AND
-                                    c.descripcion =?  AND
+                                    c.id =?  AND
                                     f.max_personas >= ? AND
                                     f.cant_banios >= IFNULL(?, f.cant_banios) AND
                                     f.cant_habitaciones >= IFNULL(?, f.cant_habitaciones) AND
@@ -126,7 +126,7 @@ class Finca extends Model
                     SELECT  f.*
                     FROM    fincas f JOIN departamentos c
                                 ON  f.departamento_id = c.id AND
-                                    c.descripcion =? AND
+                                    c.id =? AND
                                     f.max_personas >= ? AND
                                     f.cant_banios >= IFNULL(?, f.cant_banios) AND
                                     f.cant_habitaciones >= IFNULL(?, f.cant_habitaciones) AND
@@ -143,7 +143,7 @@ class Finca extends Model
                     SELECT  f.*
                     FROM    fincas f JOIN departamentos c
                                 ON  f.departamento_id = c.id AND
-                                    c.descripcion =? AND
+                                    c.id =? AND
                                     f.id NOT IN (SELECT finca_id FROM reservas) AND
                                     f.max_personas >= ? AND
                                     f.cant_banios >= IFNULL(?, f.cant_banios) AND
@@ -154,15 +154,15 @@ class Finca extends Model
                                 ON	f.via_id = v.id AND 
                                     v.id = IFNULL(?, v.id)    ";
 
-            $collection = collect(DB::select($sql,array($data['departamento'], 
+            $collection = collect(DB::select($sql,array($data['departamento_id'], 
                                             $data['cantHuespedes'],
                                             $filtros['banios'], $filtros['habitaciones'],
                                             filter_var($filtros['snJacuzi'], FILTER_VALIDATE_BOOLEAN), filter_var($filtros['snPiscina'], FILTER_VALIDATE_BOOLEAN), $filtros['via'],
-                                            $data['departamento'], $data['cantHuespedes'],                                            
+                                            $data['departamento_id'], $data['cantHuespedes'],                                            
                                             $filtros['banios'], $filtros['habitaciones'],
                                             filter_var($filtros['snJacuzi'], FILTER_VALIDATE_BOOLEAN), filter_var($filtros['snPiscina'], FILTER_VALIDATE_BOOLEAN),
                                             $data['fecSalida'], $filtros['via'],                                            
-                                            $data['departamento'], $data['cantHuespedes'],
+                                            $data['departamento_id'], $data['cantHuespedes'],
                                             $filtros['banios'], $filtros['habitaciones'],
                                             filter_var($filtros['snJacuzi'], FILTER_VALIDATE_BOOLEAN), filter_var($filtros['snPiscina'], FILTER_VALIDATE_BOOLEAN), $filtros['via'])));
         }
