@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Departamento;
+use App\Finca;
 
 class DepartmentController extends Controller
 {
@@ -93,7 +94,12 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $departamento = Departamento::find($id)->delete();        
-        return back()->with('info', 'Registro Eliminado Correctamente');
+        $fincas = Finca::where('departamento_id', $id)->count();
+        if($fincas > 0)
+            return back()->with('danger', 'Existen fincas relacionadas a este departamento, no puede ser eliminado hasta que las fincas no sean eliminadas previamente');
+        else{
+            $departamento = Departamento::find($id)->delete();        
+            return back()->with('info', 'Registro Eliminado Correctamente');
+        }
     }
 }

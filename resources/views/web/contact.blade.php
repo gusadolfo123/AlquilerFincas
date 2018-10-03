@@ -61,9 +61,12 @@
                     <div class="card border-success mt-5">
                         <div class="card-body">
                             <h2 class="item-title text-center">Mapa Ubicacion</h2>
+                            
                             <p class="card-text">
-                                <iframe class="col-lg-12" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.4834377794136!2d-74.10877738484268!3d4.506511996725554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3fa3cc9ef341e9%3A0xd2bb7295acb23945!2sCL+84+Sur+-+KR+4A+Este!5e0!3m2!1ses!2sco!4v1534635371957" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                {{-- <iframe class="col-lg-12" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.4834377794136!2d-74.10877738484268!3d4.506511996725554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3fa3cc9ef341e9%3A0xd2bb7295acb23945!2sCL+84+Sur+-+KR+4A+Este!5e0!3m2!1ses!2sco!4v1534635371957" frameborder="0" style="border:0" allowfullscreen></iframe> --}}
+                                <iframe class="col-lg-12" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.0690046807745!2d-74.04104118588698!3d4.758021596544433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f858faa7ae7c1%3A0x8516874f666ead3!2sCra.+17b+%26+Cl.+181%2C+Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1537980390872" frameborder="0" style="border:0" allowfullscreen></iframe>
                             </p>
+                            <p class="text-center"><small>La atención es con cita previa</small></p>
                         </div>
                     </div>  
                     <!-- Grid row -->

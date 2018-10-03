@@ -24,15 +24,13 @@
         <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet">
         <link href="{{ asset('css/myStyles.css') }}" rel="stylesheet">
         
-        
-
     </head>
-    <!-- <body class="myBody my-4 example"> -->
+    {{-- <body class="myBody my-4 example">  --}}
     <body class=" bg-primary">
         
         <div id="app" class="container">
             
-            <div class="row-fluid mar-zero ">
+            <div class="row-fluid mar-zero">
                 <div class="text-center my-2 my-lg-0 d-block d-sm-none my-0 mt-0">
                     <a href="https://www.facebook.com/Alquilamosfinks/"  target="_blank" class="fa fa-facebook"></a>
                     <a href="https://twitter.com/Alquilamosfinks"  target="_blank" class="fa fa-twitter"></a>
@@ -44,9 +42,11 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-success centrar_texto">
                 
                 <!-- <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 mt-md-0 mt-4 py-3 text-center"> -->
-                <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 text-center">
-                    <a class="navbar-brand" href="#">{{ config('app.name', 'Alquiler Fincas') }}</a>
-                    <!-- <img src="{{ asset('img/loguito.png') }}"  class="d-inline-block align-top myImages mw-100" alt=""> -->
+                <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 text-center">                    
+                    {{-- <a href="#" class=" text-light">{{ config('app.name', 'Alquiler Fincas') }} <br /> <small class="text-light"> Nit: 901.104.021-0</small></a> --}}
+                    
+                    <img src="{{ asset('img/loguito.png') }}"  class="d-inline-block align-top myImages mw-100 transparencia_top" alt="">
+                    <small class="text-light mt-3 mb-0"> Nit: 901.104.021-0</small>
                 </div>
                 
                 <button class="navbar-toggler col-sm-12 color_toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,15 +86,15 @@
             </main>
 
             <!-- Footer -->
-            <footer class="page-footer font-small blue bg-dark text-light border border-right-0 border-left-0 border-bottom-0 border-success">
+            <footer class="page-footer font-small blue bg-dark text-light border border-right-0 border-left-0 border-bottom-0 border-success footer_personal">
                 <!-- Footer Links -->
                 <div class="container-fluid text-center text-md-left">
                 
                     <!-- Grid row -->
                     <div class="row pt-4 pb-4">
                         <!-- Grid column -->
-                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 mt-md-0 mt-4 py-3 text-center noneDisplay">
-                            <img src="{{ asset('img/loguito.png') }}"  class="d-inline-block align-top myImages mw-100" alt="">
+                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 mt-md-0 mt-4 py-3 text-center noneDisplay">
+                            <img src="{{ asset('img/loguito.png') }}"  class="d-inline-block align-top myImages mw-100 transparencia" alt="">
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-md-0 mt-4 py-3">
                             <i class="fas fa-clock"></i>  <strong>Horario de Atencion:</strong><br> Lunes a Viernes 9:00 AM - 5:00 PM <br> Sábados 10:00 AM - 2:00 PM

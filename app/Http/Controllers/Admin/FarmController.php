@@ -11,6 +11,7 @@ use App\Via;
 use App\Departamento;
 use Illuminate\Support\Facades\Storage;
 use App\fotoFinca;
+use App\Reserva;
 
 
 class FarmController extends Controller
@@ -170,9 +171,25 @@ class FarmController extends Controller
      */
     public function destroy($id)
     {
-        $finca = Finca::find($id)->delete();
+        $reservas = Reserva::where('finca_id', $id)->count();
+
+        if($reservas > 0)
+            return back()->with('danger', 'Existen Reservas relacionadas a esta finca, no puede ser eliminado hasta que las reservas no sean eliminadas previamente');
+        else{
+
+            /* Elimina Fotos de la Finca */
+            $fotos = fotoFinca::where('finca_id', $id)->get();
+
+            foreach ($fotos as $foto) {
+                unlink(public_path().'/'.$foto->name);
+                $del = fotoFinca::where('id', $foto->id)->delete();
+            }
+            
+            $finca = Finca::find($id)->delete();
+
+            return back()->with('info', 'Registro Eliminado Correctamente');
+        }
         
-        return back()->with('info', 'Registro Eliminado Correctamente');
 
     }
     

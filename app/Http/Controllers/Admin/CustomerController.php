@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Cliente;
+use App\Reserva;
 
 class CustomerController extends Controller
 {
@@ -96,7 +97,12 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $cliente = Cliente::find($id)->delete();        
-        return back()->with('info', 'Registro Eliminado Correctamente');
+        $reservas = Reserva::where('cliente_id', $id)->count();
+        if($reservas > 0)
+            return back()->with('danger', 'Existen Reservas relacionadas a este cliente, no puede ser eliminado hasta que las reservas no sean eliminadas previamente');
+        else{
+            $cliente = Cliente::find($id)->delete();
+            return back()->with('info', 'Registro Eliminado Correctamente');
+        }                
     }
 }

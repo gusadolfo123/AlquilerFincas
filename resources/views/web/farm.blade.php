@@ -69,9 +69,9 @@
         <div class="row-fluid pt-3">
             <div class="alert alert-light mb-0 pb-0 fade show" role="alert">    
                 <div class="row mb-2">
-                    <div class="col-md-6 col-sm-6 col-12 centrar_texto2"><strong>Finca: {{ $finca->nombre }}</strong></div>
+                    <div class="col-md-6 col-sm-6 col-12 centrar_texto2"><h2>Finca: {{ $finca->nombre }}</h2></div>
                     <div class="col-md-6 col-sm-6 col-12">
-                        <div class="row text-center justify-content-end">
+                        <div class="row text-center align-items-center">
                             <div class="col-4">
                                 <span><i class="fas fa-users"></i> {{ $finca->max_personas }}</span>
                             </div>
@@ -265,7 +265,24 @@
                         <div class="card bg-light mb-3">
                             <div class="card-header">Terminos y Condiciones</div>
                             <div class="card-body">
-                                <p class="card-text">{!! $finca->descripcion !!}</p>
+                                <p class="card-text">°Se aceptan mascotas pequeñas. 
+<br />
+°Check In 10 Am - Check Out 4 Pm. 
+<br />
+°Se debe dejar valor de depósito por daños y un valor de aseo final.
+<br />
+°Las personas adicionales son confirmadas a la entrada y manejan tarifa extra. 
+<br />
+°Las reservas se realizan con el 50% en nuestra oficina o vía bancaria.
+ <br />
+°Los saldos se deben cancelar 5 días antes del viaje .
+<br />
+°Se debe manejar un comportamiento adecuado en las propiedades vacacionales.
+<br />
+°Se deben llevar tendidos, e implemento de Aseo.
+<br />
+°No se realizan devoluciones de dinero, si el cliente turista no puede viajar se posterga para otra fecha.
+</p>
                             </div>
                         </div>
                     </div>
@@ -370,7 +387,7 @@
                     </div>           
                 </div>
 
-                Una ves enviado el presente formulario, en los proximos minutos nos pondremos en contacto 
+                Una vez enviado el presente formulario, en los proximos minutos nos pondremos en contacto 
                 para indicarle el proceso a seguir.      
                 <div class="modal-footer mt-2">
                     <button type="submit" id="enviarForm" class="btn btn-primary">Enviar</button>
@@ -627,40 +644,23 @@
                     $('#idTotal').addClass('d-none');
                     $('#tituloTotal').addClass('d-none');
                     $('#btnConfirmar').addClass('d-none');
-
+                    
                 }
                     
                 
                 if(dataSel.length > 1)
-                {
-                    
+                {                    
                     var d1 = dataSel[0];
-                    var dateP = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate() + 1, 0, 0, 0, 0);
-                    dateP.setMinutes(d1.getMinutes() + d1.getTimezoneOffset()); // corrige el dia que se descontaba por zona horaria
-                    var curr_date1 = dateP.getDate();
-                    var curr_month1 = dateP.getMonth() + 1; //Months are zero based
-                    var curr_year1 = dateP.getFullYear();
-                    var formattedDate1 = (curr_date1.toString().length == 1 ? "0" + curr_date1 : curr_date1) + "/" + 
-                                         (curr_month1.toString().length == 1 ? "0" + curr_month1 : curr_month1) + "/" + 
-                                         curr_year1;
-                    
+                    var dateP = clonarFecha(d1, 1);                    
+                    var formattedDate1 = dateToStringValido(dateP);                    
                     var dd1 = new Date(d1.getFullYear(), d1.getMonth(), d1.getDate() + 1, 0, 0, 0, 0);
 
                     $("#dpEntrada").val(formattedDate1);
 
-                    var d2 = dataSel[1];                   
-                    //d2.setMinutes(0 + d2.getTimezoneOffset());
-                    var dateP2 = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate() + 1, 0, 0, 0, 0);
-                    dateP2.setMinutes(d2.getMinutes() + d2.getTimezoneOffset()); // corrige el dia que se descontaba por zona horaria
-                    var curr_date2 = dateP2.getDate();
-                    var curr_month2 = dateP2.getMonth() + 1; //Months are zero based
-                    var curr_year2 = dateP2.getFullYear();
-                    var formattedDate2 = (curr_date2.toString().length == 1 ? "0" + curr_date2 : curr_date2) + "/" + 
-                                         (curr_month2.toString().length == 1 ? "0" + curr_month2 : curr_month2) + "/" + 
-                                         curr_year2;
-
-                    var dd2 = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate() + 1, 0, 0, 0, 0);
-                    
+                    var d2 = dataSel[1];           
+                    var dateP2 = clonarFecha(d2, 1);                    
+                    var formattedDate2 = dateToStringValido(dateP2);
+                    var dd2 = new Date(d2.getFullYear(), d2.getMonth(), d2.getDate() + 1, 0, 0, 0, 0);                    
 
                     if(dd2 < dd1)
                     {
@@ -671,14 +671,31 @@
                         var daysDiff = Math.abs(Math.floor(timeDiff / (1000 * 60 * 60 * 24)));
                         
                         var diasTempAlta = 0, diasTempMedia = 0, valTotal = 0, diasReservaCons = 0;
-                                           
+                        var bAlta = false, bMedia = false;
+                        
+
+                        var datePrueba = clonarFecha(d1, 0);                    
+                        var formattedDatePrueba = dateToStringValido(datePrueba);
+
+                        tempAlta.sort();
+                        tempMedia.sort();
+                        
+                        if(tempMedia.indexOf(formattedDate1) == -1 && tempMedia.indexOf(formattedDatePrueba) != -1 || 
+                            tempMedia.indexOf(formattedDate1) == -1 && tempMedia.indexOf(formattedDatePrueba) == -1)
+                            bMedia = true;
+
+                        if(tempAlta.indexOf(formattedDate1) == -1 && tempAlta.indexOf(formattedDatePrueba) != -1 ||
+                            tempAlta.indexOf(formattedDate1) == -1 && tempAlta.indexOf(formattedDatePrueba) == -1)
+                            bAlta = true;
+
                         fecReservadas.forEach(element => {
                             
                             let strDate = element.toString();
                             let fec = new Date(strDate.substr(6,7), strDate.substring(3,5) - 1, strDate.substr(0,2));                            
                             
                             if( fec <= dd1 && fec >= dd2 )
-                                diasReservaCons++;
+                                diasReservaCons++;                                                     
+
                         });
                         
                         var snReservado = false;
@@ -701,10 +718,13 @@
                                     
                                 });
 
-                                if(!snReservado)
+                                if(!snReservado){
                                     diasTempAlta++;
-
-                            }    
+                                }
+                                
+                                 
+                            }
+                       
                             
                         });
                         
@@ -735,16 +755,50 @@
                                     aux++;
                                 }
                               
-                                if(!snReservado)
+                                if(!snReservado){
                                     diasTempMedia++;
-                            }                                                          
+                                }
+                            }
+                                                                                 
 
-                        });                                                
+                        });                      
+                        
+
+                        if(diasTempAlta > 0)
+                            diasTempAlta -= 1;
+                        
+                        
+                        if(diasTempMedia > 0)
+                            diasTempMedia -= 1;
+                      
+                        if(diasTempAlta > 0 && bAlta == true)
+                            diasTempAlta += 1;             
+                     
+                        if(diasTempMedia > 0 && bMedia == true)
+                            diasTempMedia += 1;
                         
                         var diasTempNormal = daysDiff - (diasTempAlta + diasTempMedia + diasReservaCons);
                         
                         //console.log({'diasReservaCons': diasReservaCons,  'diasTempNormal': diasTempNormal, 'daysDiff': daysDiff, 'diasTempAlta': diasTempAlta, 'diasTempMedia': diasTempMedia});                       
+
+                        $('#totalNochesTempAlta').addClass('d-none');
+                        $('#totalNochesTempMedia').addClass('d-none');
+                        $('#totalNochesTempNormal').addClass('d-none');
+
+                        $('#fecTempAlta').addClass('d-none');
+                        $('#fecTempMedia').addClass('d-none');
+                        $('#fecTempNormal').addClass('d-none');
                         
+                        $('#nroNochesA').html("0");
+                        $('#nroNochesM').html("0");
+                        $('#nroNochesN').html("0");
+
+                        $('#totalNochesTempAlta').html("0");
+                        $('#totalNochesTempMedia').html("0");
+                        $('#totalNochesTempNormal').html("0");
+
+                        
+
                         if(diasTempAlta > 0){
                             $('#fecTempAlta').removeClass('d-none');
                             $('#totalNochesTempAlta').removeClass('d-none');
@@ -798,7 +852,22 @@
                         var daysDiff = Math.abs(Math.floor(timeDiff / (1000 * 60 * 60 * 24)));     
                         
                         var diasTempAlta = 0, diasTempMedia = 0, valTotal = 0, diasReservaCons = 0;
+                        var bAlta = false, bMedia = false;
                         
+                        var datePrueba = clonarFecha(d2, 0);                    
+                        var formattedDatePrueba = dateToStringValido(datePrueba);
+
+                        tempAlta.sort();
+                        tempMedia.sort();
+                        
+                        if(tempMedia.indexOf(formattedDate2) == -1 && tempMedia.indexOf(formattedDatePrueba) != -1 || 
+                            tempMedia.indexOf(formattedDate2) == -1 && tempMedia.indexOf(formattedDatePrueba) == -1)
+                            bMedia = true;
+
+                        if(tempAlta.indexOf(formattedDate2) == -1 && tempAlta.indexOf(formattedDatePrueba) != -1 ||
+                            tempAlta.indexOf(formattedDate2) == -1 && tempAlta.indexOf(formattedDatePrueba) == -1)
+                            bAlta = true;
+
                         fecReservadas.forEach(element => {
                             
                             let strDate = element.toString();
@@ -828,10 +897,11 @@
                                     
                                 });
 
-                                if(!snReservado)
+                                if(!snReservado){
                                     diasTempAlta++;
-
-                            }    
+                                }
+                            }
+                          
                         });
 
                         snReservado = false;
@@ -861,15 +931,46 @@
                                     aux++;
                                 }
                               
-                                if(!snReservado)
+                                if(!snReservado){
                                     diasTempMedia++;
-                            }                                                           
-
+                                }
+                            }
+                           
                         });
                         
-                        var diasTempNormal = daysDiff - (diasTempAlta + diasTempMedia + diasReservaCons);
+
+                        if(diasTempAlta > 0)
+                            diasTempAlta -= 1;
                         
-                        //console.log({'diasReservaCons': diasReservaCons,  'diasTempNormal': diasTempNormal, 'daysDiff': daysDiff, 'diasTempAlta': diasTempAlta, 'diasTempMedia': diasTempMedia});                       
+                        
+                        if(diasTempMedia > 0)
+                            diasTempMedia -= 1;
+
+                        
+                        if(diasTempAlta > 0 && bAlta == true)
+                            diasTempAlta += 1;             
+                     
+                        if(diasTempMedia > 0 && bMedia == true)
+                            diasTempMedia += 1;
+
+
+                        var diasTempNormal = daysDiff - (diasTempAlta + diasTempMedia + diasReservaCons);
+
+                        $('#totalNochesTempAlta').addClass('d-none');
+                        $('#totalNochesTempMedia').addClass('d-none');
+                        $('#totalNochesTempNormal').addClass('d-none');
+
+                        $('#fecTempAlta').addClass('d-none');
+                        $('#fecTempMedia').addClass('d-none');
+                        $('#fecTempNormal').addClass('d-none');
+
+                        $('#nroNochesA').html("0");
+                        $('#nroNochesM').html("0");
+                        $('#nroNochesN').html("0");
+
+                        $('#totalNochesTempAlta').html("0");
+                        $('#totalNochesTempMedia').html("0");
+                        $('#totalNochesTempNormal').html("0");
 
                         if(diasTempAlta > 0){
                             $('#fecTempAlta').removeClass('d-none');

@@ -98,6 +98,18 @@
             </div>
         @endif
         
+        @if(session('danger'))
+            <div class="container mt-3">
+                <div class="row-fluid">
+                    <div class="alert alert-danger alert-dismissible mb-0 fade show" role="alert">
+                        {{ session('danger') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div> 
+            </div>
+        @endif
         
         @if(count($errors))
             <div class="container mt-3">

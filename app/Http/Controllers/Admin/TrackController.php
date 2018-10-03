@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Via;
+use App\Finca;
 
 class TrackController extends Controller
 {
@@ -95,7 +96,12 @@ class TrackController extends Controller
      */
     public function destroy($id)
     {
-        $via = Via::find($id)->delete();        
-        return back()->with('info', 'Registro Eliminado Correctamente');
+        $fincas = Finca::where('via_id', $id)->count();
+        if($fincas > 0)
+            return back()->with('danger', 'Existen fincas relacionadas a este departamento, no puede ser eliminado hasta que las fincas no sean eliminadas previamente');
+        else{
+            $via = Via::find($id)->delete();      
+            return back()->with('info', 'Registro Eliminado Correctamente');
+        }
     }
 }

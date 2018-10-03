@@ -226,7 +226,7 @@ body {
 }
 .myBody {
     background-color: rgba(255, 255, 255, 0.959);
-    background-image: url(../img/fondo.jpg);
+    background-image: url(../img/fondo1.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -283,6 +283,7 @@ html .ui-button.ui-state-disabled {
 .myImages {
     -webkit-border-radius: 20px !important;
     border-radius: 20px !important;
+    background-color: #00b0f000 !important;
 }
 
 .example {
@@ -354,7 +355,12 @@ a:hover,
         background-color: rgba(37, 131, 76, 0.623) !important;
     }
     .noneDisplay {
-        display: none !important;
+        /* display: none !important; */
+        text-align: center;
+        margin: 0 auto;
+    }
+    .noneDisplay > img {
+        max-width: 70% !important;
     }
 }
 
@@ -419,7 +425,7 @@ a:hover,
     max-width: 210px;
 }
 .offer-main-button-btn {
-    background: #38c172;
+    background: #336dc4;
     border-radius: 5px;
     padding: 10px 0;
     margin: 30px 0 0;
@@ -433,7 +439,7 @@ a:hover,
     text-align: center;
 }
 .offer-main-button-bet {
-    background: #38c172;
+    background: #336dc4;
     border-radius: 5px;
     margin-top: 5px;
     padding: 20px 22px;
@@ -506,7 +512,7 @@ a:hover,
     text-align: center;
 }
 .popup-app-mercy {
-    background: #38c172;
+    background: #336dc4;
     border-radius: 5px;
     height: 71px;
     padding: 20px;
@@ -532,7 +538,7 @@ a:hover,
     text-align: center;
 }
 .popup-input-mail {
-    border: 1px solid #38c172;
+    border: 1px solid #336dc4;
     border-radius: 5px;
     font-size: 18px;
     height: 50px;
@@ -554,8 +560,8 @@ a:hover,
     background-repeat: no-repeat;
 }
 .popup-form select:focus {
-    background-image: linear-gradient(45deg, transparent 50%, #38c172 50%),
-        linear-gradient(135deg, #38c172 50%, transparent 50%),
+    background-image: linear-gradient(45deg, transparent 50%, #336dc4 50%),
+        linear-gradient(135deg, #336dc4 50%, transparent 50%),
         radial-gradient(transparent 66%, transparent 66%);
 }
 .btn {
@@ -565,8 +571,8 @@ a:hover,
     text-transform: uppercase;
 }
 .btn-custom {
-    background-color: #38c172;
-    border: 1px solid #38c172;
+    background-color: #336dc4;
+    border: 1px solid #336dc4;
     color: #fff;
     -webkit-box-shadow: 0 0 1px transparent;
     box-shadow: 0 0 1px transparent;
@@ -637,7 +643,7 @@ a:hover,
     top: 0;
 }
 .popup-form .form-group .input-group-icon {
-    background-color: #38c172;
+    background-color: #336dc4;
     border: none;
     border-radius: 4px;
     border-bottom-right-radius: 0;
@@ -654,18 +660,18 @@ a:hover,
 }
 .popup-form .form-control {
     background-color: transparent;
-    border: 1px solid #38c172;
+    border: 1px solid #336dc4;
     padding-left: 50px;
 }
 .popup-form .form-control:focus,
 .popup-form .has-error .form-control:focus {
-    border-color: #38c172;
+    border-color: #336dc4;
     box-shadow: 0 1px 1px rgba(245, 142, 3, 0.075) inset,
         0 0 8px rgba(245, 142, 3, 0.6);
 }
 .popup-form .form-control:focus + .input-group-icon,
 #resetPassForm .has-error .form-control:focus + .input-group-icon {
-    background-color: #38c172;
+    background-color: #336dc4;
     color: #fff;
 }
 .popup-form .btn.dropdown-toggle.btn-default {
@@ -674,7 +680,7 @@ a:hover,
     border-radius: 0;
     box-shadow: none;
     font-size: 14px;
-    color: #38c172;
+    color: #336dc4;
     padding: 6px 0;
     text-shadow: none;
 }
@@ -701,7 +707,7 @@ a:hover,
     top: -20px;
 }
 .popup-form .text-success {
-    color: #38c172;
+    color: #336dc4;
 }
 .popup-form .text-danger,
 .text-danger {
@@ -802,7 +808,7 @@ a:hover,
 }
 
 .nav-item:hover {
-    background-color: #0b6b338a !important;
+    background-color: #15377c !important;
 }
 
 /* GMORNEO PRUEBA 23/08/2018 */
@@ -831,7 +837,7 @@ a:hover,
 }
 
 .activeClassMedia:hover {
-    background: rgb(11, 163, 150);
+    background: #3685ad;
     color: rgba(0, 0, 0, 0.877) !important;
 }
 
@@ -870,3 +876,25 @@ a:hover,
     padding: 6px 10px !important;
 }
 
+@media only screen and (max-width: 550px) {
+    .carousel-item > img {
+        height: 100%;
+    }
+
+    .carousel-inner {
+        height: 450px;
+    }
+}
+.footer_personal {
+    background-color: #262bbd !important;
+    color: white !important;
+    opacity: 0.9;
+}
+
+.transparencia {
+    opacity: 0.8;
+}
+
+.transparencia_top {
+    opacity: 0.8;
+}

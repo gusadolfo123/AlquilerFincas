@@ -59,15 +59,15 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="img/1.jpg" alt="First slide">
+            <img class="d-block w-100" src="img/3.jpg" alt="First slide">
             
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="img/2.jpg" alt="Second slide">
+            <img class="d-block w-100" src="img/cascada.png" alt="Second slide">
             
         </div>
         <div class="carousel-item">
-            <img class="d-block w-100" src="img/3.jpg" alt="Third slide">
+            <img class="d-block w-100" src="img/amigos.png" alt="Third slide">
             
         </div>
     </div>

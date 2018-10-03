@@ -10,7 +10,10 @@
             <div class="col-md-6">
                 <a href="{{ route('farm', $finca->slug) }}">
                     <div class="card bg-dark text-success mt-4">
-                        <img class="card-img" src="{{ $finca->fotos->first()->archivo }}" alt="Card image">
+                        @if(count($finca->fotos) >0)
+                            <img class="card-img" src="{{ $finca->fotos->first()->archivo }}" alt="Card image">
+                        @endif
+
                         <div class="card-img-overlay p-0">
                             <h6 class="card-title">
                                 <small class="bg-success text-light rounded pl-1 pr-1">Via: {{ $finca->via->descripcion }} </small>

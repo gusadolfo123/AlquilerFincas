@@ -94,3 +94,30 @@ function validaFecha(fecDesde, fecHasta) {
     document.querySelector("#dpEntradaModal").value = fecDesde;
     document.querySelector("#dpSalidaModal").value = fecHasta;
 }
+
+function clonarFecha(fecha, diaAdicional = 0) {
+    var fecha = new Date(
+        fecha.getFullYear(),
+        fecha.getMonth(),
+        fecha.getDate() + diaAdicional,
+        0,
+        0,
+        0,
+        0
+    );
+    fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset()); // corrige el dia que se descontaba por zona horaria
+    return fecha;
+}
+
+function dateToStringValido(date) {
+    var curr_date1 = date.getDate();
+    var curr_month1 = date.getMonth() + 1; //Months are zero based
+    var curr_year1 = date.getFullYear();
+    return (
+        (curr_date1.toString().length == 1 ? "0" + curr_date1 : curr_date1) +
+        "/" +
+        (curr_month1.toString().length == 1 ? "0" + curr_month1 : curr_month1) +
+        "/" +
+        curr_year1
+    );
+}
